@@ -2,6 +2,13 @@
 
 
 
+## v0.1.2 (2024-02-29)
+
+### Ci
+
+* ci: __init__ ([`6ad6bac`](https://github.com/dan1hc/fgr/commit/6ad6bac87f5306301c27ec1be242582b69e1c871))
+
+
 ## v0.1.1 (2024-02-29)
 
 ### Ci
