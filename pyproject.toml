@@ -152,7 +152,7 @@ version_toml = [
     ]
 
 [tool.semantic_release.branches.main]
-match = "main"
+match = "(main|master)"
 prerelease = false
 prerelease_token = "rc"
 
