@@ -4,9 +4,10 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - "docs/**"
-      - "*.md"
+    paths:
+      - '**'
+      - '!docs/**'
+      - '!CHANGELOG.md'
 
 env:
   PY_VERSIONS: "[\"3.12\",\"3.11\",\"3.10\"]"
