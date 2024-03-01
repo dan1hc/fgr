@@ -496,7 +496,10 @@ class Base(metaclass=Meta):
 
         return hash(self) != hash(other)
 
-    def __sub__(self, other: typing.Self) -> dict[str, typing.Any]:
+    def __sub__(
+        self: dtypes.BaseType,
+        other: dtypes.BaseType
+        ) -> dict[str, typing.Any]:
         """Calculate diff between same object types."""
 
         diff = {}
@@ -505,7 +508,10 @@ class Base(metaclass=Meta):
                 diff[field] = other[field]
         return diff
 
-    def __lshift__(self, other: typing.Self) -> typing.Self:
+    def __lshift__(
+        self: dtypes.BaseType,
+        other: dtypes.BaseType
+        ) -> dtypes.BaseType:
         """
         Interpolate values from other if populated with non-default \
         and return a new instance without mutating self or other.
@@ -523,7 +529,10 @@ class Base(metaclass=Meta):
                 object_[field] = self[field]
         return object_
 
-    def __rshift__(self, other: typing.Self) -> typing.Self:
+    def __rshift__(
+        self: dtypes.BaseType,
+        other: dtypes.BaseType
+        ) -> dtypes.BaseType:
         """
         Overwrite values from other if populated with non-default \
         and return a new instance without mutating self or other.
@@ -588,7 +597,7 @@ class Base(metaclass=Meta):
         elif not k:
             raise exceptions.InvalidFieldRedefinitionError(key)
 
-    def update(self, other: typing.Union[typing.Self, dict]) -> None:
+    def update(self, other: typing.Union[dtypes.BaseType, dict]) -> None:
         """Update values like a dict."""
 
         for k, v in other.items():

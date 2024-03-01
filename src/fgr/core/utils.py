@@ -437,7 +437,7 @@ def get_enumerations(fields: dict[str, dtypes.FieldType]) -> dict[str, list]:
 
     d: dict[str, list] = {}
     for k, field in fields.items():
-        if isinstance((enum_ := field['enum']), enum.EnumType):
+        if isinstance((enum_ := field['enum']), enum.EnumMeta):
             d[k] = [e for e in enum_._member_map_.values()]
         elif isinstance(enum_, typing.get_args(dtypes.Array)):
             d[k] = list(enum_)

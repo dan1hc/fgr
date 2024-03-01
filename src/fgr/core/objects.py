@@ -2,9 +2,8 @@ __all__ = (
     'Object',
     )
 
-import typing
-
 from . import constants
+from . import dtypes
 from . import fields
 from . import meta
 
@@ -14,7 +13,7 @@ class Constants(constants.PackageConstants):  # noqa
     pass
 
 
-@typing.dataclass_transform(
+@dtypes.dataclass_transform(
     eq_default=True,
     kw_only_default=True,
     field_specifiers=(fields.Field, ),

@@ -61,7 +61,7 @@ class Field(dict, typing.Generic[dtypes.GenericType]):
             value: dtypes.GenericType = object_[self['name']]
             return value
 
-    def __getattribute__(self: typing.Self, __name: str) -> typing.Any:
+    def __getattribute__(self, __name: str) -> typing.Any:
         if __name in self:
             return self[__name]
         else:

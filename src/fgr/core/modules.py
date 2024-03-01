@@ -135,7 +135,7 @@ class Modules:
 
     __singleton = None
 
-    def __new__(cls) -> typing.Self:
+    def __new__(cls) -> 'Modules':
         if cls.__singleton is None:
             cls.__singleton = super().__new__(cls)
         return cls.__singleton

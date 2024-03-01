@@ -86,10 +86,10 @@ class Query(objects.Object):
     sorting: fields.Field[list[QuerySortBy]] = []  # type: ignore[assignment]
     limit: fields.Field[typing.Optional[int]] = None
 
-    def __and__(self, other: typing.Self) -> 'AndQuery':
+    def __and__(self, other: dtypes.Query) -> 'AndQuery':
         return AndQuery(and_=[self, other])  # type: ignore[arg-type]
 
-    def __or__(self, other: typing.Self) -> 'OrQuery':
+    def __or__(self, other: dtypes.Query) -> 'OrQuery':
         return OrQuery(or_=[self, other])  # type: ignore[arg-type]
 
     def __invert__(self) -> 'InvertQuery':

@@ -3,7 +3,7 @@ name: pr
 on: [pull_request]
 
 env:
-  PY_VERSIONS: "[\"3.12\",\"3.11\"]"
+  PY_VERSIONS: "[\"3.12\",\"3.11\",\"3.10\"]"
 
 jobs:
   setup:

@@ -24,7 +24,7 @@ class Constants(constants.PackageConstants):  # noqa
     pass
 
 
-@typing.dataclass_transform(
+@dtypes.dataclass_transform(
     eq_default=True,
     kw_only_default=True,
     field_specifiers=(_fields.Field, ),
