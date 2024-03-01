@@ -2,6 +2,13 @@
 
 
 
+## v0.1.4 (2024-03-01)
+
+### Fix
+
+* fix: __ci__ ([`1a52394`](https://github.com/dan1hc/fgr/commit/1a52394104c8bc64acc82020e8f71e981a42288a))
+
+
 ## v0.1.3 (2024-03-01)
 
 ### Ci
