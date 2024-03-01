@@ -249,6 +249,6 @@ if sys.version_info < (3, 11):
         return decorator
 
 
-else:
+else:  # pragma: no cover
 
     from typing import dataclass_transform
