@@ -31,7 +31,7 @@ Getting Started
 
 Install from command line, with pip:
 
-`$ pip install r`
+`$ pip install fgr`
 
 ```
 
