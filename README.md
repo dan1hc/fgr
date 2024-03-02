@@ -5,9 +5,10 @@
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![mypy](https://www.mypy-lang.org/static/mypy_badge.svg)](http://mypy-lang.org/)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+[![MinVersion](https://img.shields.io/python/required-version-toml?tomlFilePath=https://raw.githubusercontent.com/dan1hc/fgr/main/pyproject.toml&color=fbf93f)](https://pypi.org/project/fgr)
+[![PyVersions](https://img.shields.io/pypi/pyversions/fgr?color=bff23b)](https://pypi.org/project/fgr)
 [![PyPI](https://img.shields.io/pypi/v/fgr)](https://pypi.org/project/fgr)
-[![Downloads](https://static.pepy.tech/badge/fgr)](https://pepy.tech/project/fgr)
-[![License](https://img.shields.io/badge/License-LGPLv3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
+[![License](https://img.shields.io/pypi/l/fgr)](https://www.gnu.org/licenses/lgpl-3.0)
 
 # Overview
 

@@ -406,11 +406,11 @@ class Base(metaclass=Meta):
 
     def __init__(
         self,
-        dictionary: typing.Optional[dict[str, typing.Any]] = None,
+        class_as_dict: typing.Optional[dict[str, typing.Any]] = None,
         /,
         **kwargs: typing.Any
         ):
-        kwargs.update(dictionary or {})
+        kwargs.update(class_as_dict or {})
         for name, field in self.__fields__.items():
             self[name] = kwargs.get(
                 name,

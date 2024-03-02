@@ -18,7 +18,7 @@ class Constants(constants.PackageConstants):  # noqa
     kw_only_default=True,
     field_specifiers=(fields.Field, ),
     )
-class Object(meta.Base):
+class Object(meta.Base):  # type: ignore[misc]
     """
     Base Object.
 

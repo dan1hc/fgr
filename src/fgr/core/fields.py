@@ -29,7 +29,7 @@ class Constants(constants.PackageConstants):  # noqa
     kw_only_default=True,
     field_specifiers=(_fields.Field, ),
     )
-class Field(
+class Field(  # type: ignore[misc]
     meta.Base,
     typing.Generic[dtypes.GenericType],
     ):

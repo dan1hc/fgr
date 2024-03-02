@@ -67,7 +67,7 @@ testpaths = [
 [tool.mypy]
 files = ["./src/fgr"]
 pretty = true
-python_version = "3.10"
+python_version = "3.12"
 ignore_missing_imports = true
 implicit_optional = true
 strict_optional = false
@@ -175,6 +175,7 @@ allowed_tags = [
     ]
 minor_tags = [
     "feat",
+    "perf",
     "refactor",
     ]
 patch_tags = [
@@ -182,7 +183,6 @@ patch_tags = [
     "chore",
     "ci",
     "fix",
-    "perf",
     "style",
     "test",
     ]
