@@ -2,6 +2,13 @@
 
 
 
+## v0.1.5 (2024-03-02)
+
+### Chore
+
+* chore: __improve_310_support__ ([`acf8c3a`](https://github.com/dan1hc/fgr/commit/acf8c3aa32c5560a947df99e8e0b837c575be21e))
+
+
 ## v0.1.4 (2024-03-01)
 
 ### Fix

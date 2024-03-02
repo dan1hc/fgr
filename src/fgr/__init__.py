@@ -45,4 +45,4 @@ from .core.fields import Field
 from .core.meta import Base, Meta
 from .core.objects import Object
 
-__version__ = '0.1.4'
+__version__ = '0.1.5'
