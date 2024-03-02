@@ -2,6 +2,13 @@
 
 
 
+## v0.1.6 (2024-03-02)
+
+### Fix
+
+* fix: __default_codeql_autocommits_with_no_warning_and_bad_msgs__ ([`ceb52cc`](https://github.com/dan1hc/fgr/commit/ceb52ccfd9fe3c7d8016b0172421640c1109a1b8))
+
+
 ## v0.1.5 (2024-03-02)
 
 ### Chore
