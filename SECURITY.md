@@ -7,13 +7,11 @@ currently being supported with security updates.
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 0.1.x   | :white_check_mark: |
+| 0.x     | :white_check_mark: |
 
 ## Reporting a Vulnerability
 
-Please private message reports of suspected vulnerabilities to any project maintainer.
-
-Include expected severity level in the subject line of your message.
+Please use [this link](https://github.com/dan1hc/fgr/security/advisories/new) to report a vulnerability.
 
 Project maintenance will analyze the situation and respond with 24-48 hours, depending on severity.
 
