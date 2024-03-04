@@ -19,7 +19,7 @@ keywords = [
     "rest",
     ]
 readme = "README.md"
-version = "0.1.6"
+version = "0.1.7-rc.1"
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)",
