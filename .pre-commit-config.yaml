@@ -14,7 +14,7 @@ repos:
       - id: pytest
         stages: [pre-commit]
         name: pytest
-        entry: pytest --cov-report=
+        entry: pytest
         language: system
         pass_filenames: false
         always_run: true
