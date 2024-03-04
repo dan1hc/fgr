@@ -92,9 +92,16 @@ jobs:
       pull-requests: write
     steps:
       - uses: actions/checkout@v4
+        if: github.event_name == 'push'
         with:
           fetch-depth: 0
-          ref: ${{ github.ref }}
+          ref: ${{ github.ref_name }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v4
+        if: github.event_name != 'push'
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: semantic release
         id: release
