@@ -96,13 +96,13 @@ jobs:
         with:
           fetch-depth: 0
           ref: ${{ github.ref_name }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       - uses: actions/checkout@v4
         if: github.event_name != 'push'
         with:
           fetch-depth: 0
           ref: ${{ github.head_ref }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       - name: semantic release
         id: release
         uses: python-semantic-release/python-semantic-release@master
@@ -120,5 +120,5 @@ jobs:
         if: steps.release.outputs.released == 'true'
         uses: python-semantic-release/upload-to-gh-release@main
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           tag: ${{ steps.release.outputs.tag }}
