@@ -59,7 +59,7 @@ exclude_lines = [
     ]
 
 [tool.pytest.ini_options]
-addopts = "--cov=fgr --cov-report=html -p no:warnings"
+addopts = "--cov=fgr --cov-report= -p no:warnings"
 testpaths = [
     "src/tests",
     ]
@@ -156,8 +156,7 @@ version_toml = [
     ]
 
 [tool.semantic_release.branches.main]
-match = "(main|master)"
-prerelease = false
+match = "(main)"
 prerelease_token = "rc"
 
 [tool.semantic_release.commit_parser_options]
@@ -179,10 +178,6 @@ minor_tags = [
     "refactor",
     ]
 patch_tags = [
-    "build",
-    "chore",
     "ci",
     "fix",
-    "style",
-    "test",
     ]

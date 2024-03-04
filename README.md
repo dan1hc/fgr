@@ -1,12 +1,13 @@
 # fgr
 
-[![CI Status](https://github.com/dan1hc/fgr/actions/workflows/main.yml/badge.svg?branch=main&event=push)](https://github.com/dan1hc/fgr/actions)
-[![Code Coverage](https://img.shields.io/codecov/c/github/dan1hc/fgr.svg)](https://codecov.io/github/dan1hc/fgr?branch=main)
+[![PyVersions](https://img.shields.io/pypi/pyversions/fgr?color=brightgreen)](https://pypi.org/project/fgr)
+[![CI](https://github.com/dan1hc/fgr/actions/workflows/main.yml/badge.svg?branch=main&event=push)](https://github.com/dan1hc/fgr/actions)
+[![OpenSSF](https://img.shields.io/cii/level/8565)](https://www.bestpractices.dev/projects/8565)
+[![coverage](https://img.shields.io/badge/dynamic/toml?url=https://raw.githubusercontent.com/dan1hc/fgr/main/pyproject.toml&query=tool.coverage.report.fail_under&label=coverage&suffix=%25&color=brightgreen)](https://github.com/dan1hc/fgr/actions)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![mypy](https://www.mypy-lang.org/static/mypy_badge.svg)](http://mypy-lang.org/)
-[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
-[![MinVersion](https://img.shields.io/python/required-version-toml?tomlFilePath=https://raw.githubusercontent.com/dan1hc/fgr/main/pyproject.toml&color=fbf93f)](https://pypi.org/project/fgr)
-[![PyVersions](https://img.shields.io/pypi/pyversions/fgr?color=bff23b)](https://pypi.org/project/fgr)
+[![MinVersion](https://img.shields.io/python/required-version-toml?tomlFilePath=https://raw.githubusercontent.com/dan1hc/fgr/main/pyproject.toml&color=gold)](https://pypi.org/project/fgr)
 [![PyPI](https://img.shields.io/pypi/v/fgr)](https://pypi.org/project/fgr)
 [![License](https://img.shields.io/pypi/l/fgr)](https://www.gnu.org/licenses/lgpl-3.0)
 
@@ -54,6 +55,7 @@ pip install fgr
 
 ```py
 import fgr
+
 
 class Pet(fgr.Object):
     """A pet."""
@@ -322,9 +324,7 @@ fgr.log.info(AgentFlea())
     and optimized `Objects` (and a corresponding fgr API package) when
     supplied with access to a database for which at least one schema may be
     inferred.
-        * Developers would still need to implement any desired security schemes
-        and any additional application logic themselves, but in their first iteration,
-        CLI commands like `$ r-api-from-sql ${api_name} ${sql_conn_string} .`
+        * CLI commands like `$ fgr-api-from-sql ${api_name} ${sql_conn_string} .`
         should instantly output two ideally structured package repositories for a
         RESTful python API and corresponding object management package.
         * The package could use any supplied credentials to either query a database
@@ -342,7 +342,8 @@ fgr.log.info(AgentFlea())
         developer collaboration
         * enforce python code style best practices through automated
         [linting and formatting](https://docs.astral.sh/ruff)
-        * run tests automatically, preventing any commits that break tests
+        * type-check python code and generate a report with [mypy](https://mypy.readthedocs.io/en/stable/index.html)
+        * run tests automatically, generate reports, and prevent commits that break tests
         * automatically prevent commits that do not adhere to standardized commit
         message [conventions](https://www.conventionalcommits.org/en/v1.0.0/)
         * using those conventions, automatically [semantically version](https://python-semantic-release.readthedocs.io/en/latest/#getting-started)
@@ -354,8 +355,8 @@ fgr.log.info(AgentFlea())
         * CODEOWNERS
         * CONTRIBUTING.md
         * .git
-            * .git/hooks
-        * .github/workflows/ci.yml
+            * .git/hooks/
+        * .github/workflows/
             * Support planned for gitlab and bamboo.
         * .gitignore
         * LICENSE

@@ -13,7 +13,7 @@
 *$py.class
 
 /htmlcov
-.coverage
+*coverage*
 .mypy_cache
 .pytest_cache
 .ruff_cache
