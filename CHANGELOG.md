@@ -2,6 +2,33 @@
 
 
 
+## v0.1.7-rc.1 (2024-03-04)
+
+### Ci
+
+* ci: __more_fixing_refs__ \nFixes #5 ([`fd68912`](https://github.com/dan1hc/fgr/commit/fd6891262ca9da14261a065fa0968b1acaf1fd3b))
+
+* ci: __fixing_refs__ \nFixes #5 ([`a0b8488`](https://github.com/dan1hc/fgr/commit/a0b84882c39856e899f81ce573e564fd249fef07))
+
+* ci: __fixing_ref__ \nFixes #5 ([`90bd77f`](https://github.com/dan1hc/fgr/commit/90bd77f67826eac101f904237736d4f0a166b3ab))
+
+* ci: __fixing_pre_releases__ \nFixes #5 ([`950f0e3`](https://github.com/dan1hc/fgr/commit/950f0e3ff09041cf69c755c56771cd69b2e4e1a3))
+
+* ci: __pre_releases__ \nCloses #5 ([`eaab585`](https://github.com/dan1hc/fgr/commit/eaab585eabe659fb40def840863bc3e1a7549f34))
+
+* ci: __min_token_perms_for_publish__ \nResolves #5 ([`7195657`](https://github.com/dan1hc/fgr/commit/719565714f3f5a5a0d669862a0c6cecd9591fc8d))
+
+* ci: __pre_releases__ \ncloses: #5 (#9)
+
+going to merge in the new CI as this will be chicken / egg for a moment here... ([`eef9bc8`](https://github.com/dan1hc/fgr/commit/eef9bc817ed0010d912c7008a884739256dd2f19))
+
+* ci: __pre_releases__ \ncloses: #5 ([`564311a`](https://github.com/dan1hc/fgr/commit/564311a2e44090b2af864f50cb4d1330a37352f0))
+
+### Documentation
+
+* docs: __update_SECURITY.md__ (#3) ([`0db6e14`](https://github.com/dan1hc/fgr/commit/0db6e1493b676f56cb01da3f742e6cbb2c6ea2ba))
+
+
 ## v0.1.6 (2024-03-02)
 
 ### Fix

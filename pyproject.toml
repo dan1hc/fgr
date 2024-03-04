@@ -19,7 +19,7 @@ keywords = [
     "rest",
     ]
 readme = "README.md"
-version = "0.1.6"
+version = "0.1.7-rc.1"
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)",
@@ -157,6 +157,11 @@ version_toml = [
 
 [tool.semantic_release.branches.main]
 match = "(main)"
+prerelease = false
+
+[tool.semantic_release.branches.not_main]
+match = "(^(?!main)(.)*$)"
+prerelease = true
 prerelease_token = "rc"
 
 [tool.semantic_release.commit_parser_options]
