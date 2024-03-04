@@ -86,15 +86,10 @@ jobs:
       url: https://pypi.org/p/fgr
     permissions:
       actions: write
-      checks: write
       contents: write
       deployments: write
       id-token: write
-      issues: write
-      packages: write
-      pages: write
       pull-requests: write
-      statuses: write
     steps:
       - uses: actions/checkout@v4
         if: github.event_name == 'push'
@@ -112,7 +107,7 @@ jobs:
         id: release
         uses: python-semantic-release/python-semantic-release@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           prerelease: ${{ github.event_name == 'pull_request' }}
       - name: publish pypi
         id: pypi-publish
