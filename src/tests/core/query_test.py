@@ -135,3 +135,29 @@ class TestQuery(unittest.TestCase):
             ~(_q := self.cls.int_field >= 1),
             fgr.core.query.InvertQuery(invert=_q)
             )
+
+    def test_14_sort_asc_query(self):
+        """Test __iadd__."""
+
+        q = self.cls.int_field >= 1
+        q += self.cls.int_field.name
+        self.assertEqual(
+            q.sorting[0],
+            fgr.core.query.QuerySortBy(
+                field=self.cls.int_field.name,
+                direction='asc'
+                )
+            )
+
+    def test_15_sort_desc_query(self):
+        """Test __isub__."""
+
+        q = self.cls.int_field >= 1
+        q -= self.cls.int_field.name
+        self.assertEqual(
+            q.sorting[0],
+            fgr.core.query.QuerySortBy(
+                field=self.cls.int_field.name,
+                direction='desc'
+                )
+            )

@@ -192,13 +192,50 @@ assert isinstance(Pet.type_, fgr.Field)
 
 assert dog.type_ == Pet.type_.default == 'dog'
 
-query = Pet.type_ == 'dog'
-assert dict(query) == {
-    'field': 'type_',
-    'eq': 'dog',
-    'limit': None,
-    'sorting': [],
+query = (
+    (
+        (Pet.type_ == 'dog')
+        & (Pet.name == 'Fido')
+        )
+    | Pet.name % ('fido', 0.75)
+    )
+query += 'name'
+assert query.to_dict() == {
+  'limit': None,
+  'or': [
+    {
+      'and': [
+        {
+          'eq': 'dog',
+          'field': 'type_',
+          'limit': None,
+          'sorting': []
+        },
+        {
+          'eq': 'Fido',
+          'field': 'name',
+          'limit': None,
+          'sorting': []
+        }
+      ],
+      'limit': None,
+      'sorting': []
+    },
+    {
+      'field': 'name',
+      'like': 'fido',
+      'limit': None,
+      'sorting': [],
+      'threshold': 0.75
     }
+  ],
+  'sorting': [
+    {
+      'direction': 'asc',
+      'field': 'name'
+    }
+  ]
+}
 
 ```
 

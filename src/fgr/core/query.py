@@ -59,8 +59,11 @@ class Query(objects.Object):
     Query to match the opposite of any conditions specified \
     instead.
 
-    Queries also support optional result limiting and sorting, which \
-    can be specified by setting the 'sorting' and 'limit' fields.
+    Queries also support optional result limiting and sorting:
+
+    * Result limits can be specified by setting the `limit` field.
+    * Results can be sorted any number of times using the `+=` and `-=` \
+    operators.
 
     ---
 
@@ -73,18 +76,32 @@ class Query(objects.Object):
             | (Object.string_field % ('test', 0.75))
             )
         & ~(Object.list_field << 'test')
-        )
+        ) += 'string_field' -= 'integer_field'
     ```
 
     In the example above, the query would match any `Object` for which \
     the string `'test'` is `not` a member of `list_field` and for which \
     either the value for `integer_field` is greater than or equal to `1` \
-    or the value for `string_field` is at least `75%` similar to `'test'`.
+    or the value for `string_field` is at least `75%` similar to `'test'`. \
+    Results would then be sorted first in `ascending` order on `string_field`, \
+    then in `descending` order on `integer_field`.
 
     """
 
     sorting: fields.Field[list[QuerySortBy]] = []  # type: ignore[assignment]
     limit: fields.Field[typing.Optional[int]] = None
+
+    def __iadd__(self: dtypes.QueryType, field: str) -> dtypes.QueryType:
+        """Add an ascending sort to the selected `Query` by field."""
+
+        self._sort_by(field)
+        return self
+
+    def __isub__(self: dtypes.QueryType, field: str) -> dtypes.QueryType:  # type: ignore[misc, override]
+        """Add a descending sort to the selected `Query` by field."""
+
+        self._sort_by(field, direction='desc')
+        return self
 
     def __and__(self, other: dtypes.Query) -> 'AndQuery':
         return AndQuery(and_=[self, other])  # type: ignore[arg-type]
@@ -94,6 +111,22 @@ class Query(objects.Object):
 
     def __invert__(self) -> 'InvertQuery':
         return InvertQuery(invert=self)  # type: ignore[arg-type]
+
+    def _sort_by(
+        self,
+        field: str,
+        direction: typing.Union[typing.Literal['asc'], typing.Literal['desc']] = 'asc'  # noqa
+        ) -> None:
+        """
+        Sort the selected `Query` by `field` and `direction`.
+
+        Direction may be either `'asc'` or `'desc'`.
+
+        The `field` should correspond to an existing field for the `Object`.
+
+        """
+
+        self.sorting.append(QuerySortBy(field=field, direction=direction))  # type: ignore[arg=type, arg-type]
 
 
 class QueryCondition(Query):
