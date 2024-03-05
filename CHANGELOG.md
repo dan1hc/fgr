@@ -2,6 +2,21 @@
 
 
 
+## v0.2.0-rc.1 (2024-03-05)
+
+### Ci
+
+* ci: __re_codeql__ \nResolves #4 (#11) ([`02ce161`](https://github.com/dan1hc/fgr/commit/02ce161a31d535a7d533c907f04e1ef3deba96a7))
+
+### Feature
+
+* feat: __privatize_meta_module__ ([`d72938b`](https://github.com/dan1hc/fgr/commit/d72938bc2008f0fa58aebd294dcf6af0a1be8766))
+
+### Fix
+
+* fix: __ci_glob_fix__ ([`5ef2cc2`](https://github.com/dan1hc/fgr/commit/5ef2cc2f6e71a0b4e081303312d72922aa4a7f29))
+
+
 ## v0.1.7 (2024-03-04)
 
 ### Ci

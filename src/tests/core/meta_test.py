@@ -11,7 +11,7 @@ class TestBase(unittest.TestCase):
     """Fixture for testing Base."""
 
     def setUp(self) -> None:
-        self.mcs = fgr.Meta
+        self.mcs = fgr.core.meta.Meta
         self.cls = mocking.Derivative
         self.object_ = self.cls()
         self.trip = mocking.TripDeriv(
@@ -132,7 +132,7 @@ class TestMeta(unittest.TestCase):
     """Fixture for testing Meta."""
 
     def setUp(self) -> None:
-        self.mcs = fgr.Meta
+        self.mcs = fgr.core.meta.Meta
         self.cls = mocking.Derivative
         self.field = fgr.Field(
             name='str_field',
@@ -315,7 +315,7 @@ class TestMeta(unittest.TestCase):
 
         self.mcs(
             'ExcTest',
-            (fgr.Base, ),
+            (fgr.core.meta.Base, ),
             {
                 '__annotations__': {
                     self.field.name: typing.ClassVar[str],
@@ -330,7 +330,7 @@ class TestMeta(unittest.TestCase):
 
         self.mcs(
             'ExcTest',
-            (fgr.Base, ),
+            (fgr.core.meta.Base, ),
             {
                 '__annotations__': {
                     self.field.name: typing.Final[str],
@@ -345,7 +345,7 @@ class TestExceptions(unittest.TestCase):
     """Fixture for testing exceptions."""
 
     def setUp(self) -> None:
-        self.mcs = fgr.Meta
+        self.mcs = fgr.core.meta.Meta
         self.field = fgr.Field(
             name='str_field',
             default='value',
@@ -360,7 +360,7 @@ class TestExceptions(unittest.TestCase):
             fgr.core.exceptions.ReservedKeywordError,
             lambda: self.mcs(
                 'ExcTest',
-                (fgr.Base, ),
+                (fgr.core.meta.Base, ),
                 {
                     '__cache__': {},
                     '__module__': self.__module__
@@ -375,7 +375,7 @@ class TestExceptions(unittest.TestCase):
             fgr.core.exceptions.MissingTypeAnnotation,
             lambda: self.mcs(
                 'ExcTest',
-                (fgr.Base, ),
+                (fgr.core.meta.Base, ),
                 {
                     self.field.name: self.field,
                     '__annotations__': {},
@@ -391,7 +391,7 @@ class TestExceptions(unittest.TestCase):
             fgr.core.exceptions.FieldAnnotationeError,
             lambda: self.mcs(
                 'ExcTest',
-                (fgr.Base, ),
+                (fgr.core.meta.Base, ),
                 {
                     self.field.name: self.field,
                     '__annotations__': {
@@ -409,7 +409,7 @@ class TestExceptions(unittest.TestCase):
             fgr.core.exceptions.ReservedKeywordError,
             lambda: self.mcs(
                 'ExcTest',
-                (fgr.Base, ),
+                (fgr.core.meta.Base, ),
                 {
                     '__annotations__': {
                         '__cache__': {},
@@ -426,7 +426,7 @@ class TestExceptions(unittest.TestCase):
             fgr.core.exceptions.FieldAnnotationeError,
             lambda: self.mcs(
                 'ExcTest',
-                (fgr.Base, ),
+                (fgr.core.meta.Base, ),
                 {
                     '__annotations__': {
                         self.field.name: str,
@@ -443,7 +443,7 @@ class TestExceptions(unittest.TestCase):
             fgr.core.exceptions.IncorrectCasingError,
             lambda: self.mcs(
                 'ExcTest',
-                (fgr.Base, ),
+                (fgr.core.meta.Base, ),
                 {
                     '__annotations__': {
                         'string_field': fgr.Field[str],

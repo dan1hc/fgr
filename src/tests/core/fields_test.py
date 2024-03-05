@@ -103,7 +103,7 @@ class TestField(unittest.TestCase):
 
         self.assertRaises(
             fgr.core.exceptions.IncorrectTypeError,
-            lambda: fgr.Meta.__setitem__(
+            lambda: fgr.core.meta.Meta.__setitem__(
                 fgr.Field,
                 'name',
                 fgr.Field(
