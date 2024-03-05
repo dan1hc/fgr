@@ -44,4 +44,4 @@ from . core import log
 from .core.fields import Field
 from .core.objects import Object
 
-__version__ = '0.1.7'
+__version__ = '0.2.0-rc.1'
