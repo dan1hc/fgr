@@ -2,6 +2,13 @@
 
 
 
+## v0.3.0 (2024-03-05)
+
+### Feature
+
+* feat: __query_sort_by__ \nresolves #7 (#14) ([`5704a87`](https://github.com/dan1hc/fgr/commit/5704a87e4436c05ca2cda26112f28397a9f397b8))
+
+
 ## v0.2.1 (2024-03-05)
 
 ### Fix
