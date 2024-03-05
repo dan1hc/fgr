@@ -107,6 +107,7 @@ jobs:
         id: release
         uses: python-semantic-release/python-semantic-release@master
         with:
+          changelog: ${{ github.event_name == 'push' }}
           github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           prerelease: ${{ github.event_name == 'pull_request' }}
       - name: publish pypi
