@@ -112,7 +112,7 @@ REDACTION_PATTERNS = [
 		ID='slack-web-hook',
 		Title='Slack Webhook',
 		Severity='MEDIUM',
-		Regex=re.compile(r"""https:\/\/hooks.slack.com\/services\/[A-Za-z0-9+\/]{44,48}"""),
+		Regex=re.compile(r"""https:\/\/hooks\.slack\.com\/services\/[A-Za-z0-9+\/]{44,48}"""),
 		),
 	dtypes.RePatternDict(
 		ID='twilio-api-key',
