@@ -2,11 +2,15 @@
 
 
 
-## v0.2.0 (2024-03-05)
+## v0.3.0-rc.1 (2024-03-05)
 
 ### Ci
 
 * ci: __re_codeql__ \nResolves #4 (#11) ([`02ce161`](https://github.com/dan1hc/fgr/commit/02ce161a31d535a7d533c907f04e1ef3deba96a7))
+
+### Fix
+
+* fix: __slack_regex_fix__ \nfixes #2 ([`04a1361`](https://github.com/dan1hc/fgr/commit/04a1361c7a57d0e43e605c0b5997f3274bd3a773))
 
 ### Refactor
 
