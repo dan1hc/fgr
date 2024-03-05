@@ -14,6 +14,7 @@ __all__ = (
     'Primitive',
     'RePatternDict',
     'Query',
+    'QueryType',
     'Serial',
     'SupportsFields',
     'Type',
@@ -47,8 +48,9 @@ T = typing.TypeVar('T')
 Default = typing.TypeVar('Default')
 Type = typing.TypeVar('Type', bound=type[typing.Any])
 BaseType = typing.TypeVar('BaseType', bound='meta.Base')
-MetaType = typing.TypeVar('MetaType', bound='meta.Meta')
 GenericType = typing.TypeVar('GenericType', bound=typing.Any)
+MetaType = typing.TypeVar('MetaType', bound='meta.Meta')
+
 Array = typing.Union[
     collections.deque,
     frozenset,
@@ -108,6 +110,7 @@ Query = typing.Union[
     'query.GeQueryCondition',
     'query.GtQueryCondition',
     ]
+QueryType = typing.TypeVar('QueryType', bound=Query)
 ValidLogType = typing.Union[
     str,
     dict,
