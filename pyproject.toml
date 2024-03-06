@@ -179,10 +179,9 @@ allowed_tags = [
     ]
 minor_tags = [
     "feat",
-    "perf",
     "refactor",
     ]
 patch_tags = [
-    "ci",
     "fix",
+    "perf",
     ]
