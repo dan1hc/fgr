@@ -9,8 +9,14 @@ on:
   push:
     branches:
       - main
-    paths:
-      - '**/*.py'
+    paths-ignore:
+      - '*.md'
+      - '*.toml'
+      - '*.yaml'
+      - '.gitignore'
+      - 'docs/*'
+      - 'src/fgr/__init__.py'
+      - 'LICENSE'
   schedule:
     - cron: 0 0 * * 0
 
