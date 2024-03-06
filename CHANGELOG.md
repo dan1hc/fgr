@@ -2,6 +2,13 @@
 
 
 
+## v0.3.1 (2024-03-06)
+
+### Ci
+
+* ci: __release_ci_fix__ \nfixes #16 (#18) ([`8d4076b`](https://github.com/dan1hc/fgr/commit/8d4076b805f374d448ae9ac5f888acd440244f1c))
+
+
 ## v0.3.0 (2024-03-05)
 
 ### Feature
