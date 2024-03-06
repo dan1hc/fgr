@@ -5,16 +5,18 @@ on:
     branches:
       - main
     paths:
-      - '**'
-      - '!docs/*'
-      - '!**/*.md'
+      - '**/*.py'
   push:
     branches:
       - main
-    paths:
-      - '**'
-      - '!docs/*'
-      - '!**/*.md'
+    paths-ignore:
+      - '*.md'
+      - '*.toml'
+      - '*.yaml'
+      - '.gitignore'
+      - 'docs/*'
+      - 'src/fgr/__init__.py'
+      - 'LICENSE'
 
 env:
   PY_VERSIONS: "[\"3.12\",\"3.11\",\"3.10\"]"
@@ -92,16 +94,9 @@ jobs:
       pull-requests: write
     steps:
       - uses: actions/checkout@v4
-        if: github.event_name == 'push'
         with:
           fetch-depth: 0
-          ref: ${{ github.ref_name }}
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-      - uses: actions/checkout@v4
-        if: github.event_name != 'push'
-        with:
-          fetch-depth: 0
-          ref: ${{ github.head_ref }}
+          ref: ${{ github.event_name == 'push' && github.ref_name || github.head_ref }}
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       - name: semantic release
         id: release
