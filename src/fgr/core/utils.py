@@ -461,9 +461,13 @@ def key_for(
     field name for the otherwise friendly alias, 'id'.
 
     ```py
-    import fgr.template.package
+    class Pet(fgr.Object):
+        \"""A pet.\"""
 
-    fgr.template.package.objects.Pet.key_for('id')
+        _id: str = None
+
+
+    Pet.key_for('id')
     >>>
     '_id'
 

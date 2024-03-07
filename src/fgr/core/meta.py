@@ -302,7 +302,14 @@ class Meta(type):
     @typing.overload
     def __iter__(cls) -> typing.Iterator[tuple[str, 'fields_.Field']]: ...
     def __iter__(cls) -> typing.Iterator[tuple[str, dtypes.FieldType]]:
-        """Return an iterator of keys and Fields like a dict."""
+        """
+        Return an iterator of keys and Fields like a dict.
+
+        ---
+
+        Removes any suffixed underscores from field names (`_`).
+
+        """
 
         for k, v in Meta.items(cls):
             yield k, v
@@ -362,10 +369,17 @@ class Meta(type):
     @typing.overload
     def items(cls) -> typing.Iterator[tuple[str, 'fields_.Field']]: ...
     def items(cls) -> typing.Union[typing.Iterator[tuple[str, 'fields_.Field']], typing.Iterator[tuple[str, '_fields.Field']]]:  # noqa
-        """Return an iterator of keys and Fields like a dict."""
+        """
+        Return an iterator of keys and Fields like a dict.
+
+        ---
+
+        Removes any suffixed underscores from field names (`_`).
+
+        """
 
         for name in cls.__fields__:
-            yield name, cls[name]
+            yield name.removesuffix('_'), cls[name]
 
     def update(cls, other: dtypes.MetaType) -> None:
         """Update fields like a dict."""
@@ -446,7 +460,14 @@ class Base(metaclass=Meta):
             raise exceptions.InvalidFieldRedefinitionError(key)
 
     def __iter__(self) -> typing.Iterator[tuple[str, typing.Any]]:
-        """Return an iterator of keys and values like a dict."""
+        """
+        Return an iterator of keys and values like a dict.
+
+        ---
+
+        Removes any suffixed underscores from field names (`_`).
+
+        """
 
         for k, v in self.items():
             yield k, v
@@ -569,17 +590,31 @@ class Base(metaclass=Meta):
             return default
 
     def items(self) -> typing.Iterator[tuple[str, typing.Any]]:
-        """Return an iterator of keys and values like a dict."""
+        """
+        Return an iterator of keys and values like a dict.
 
-        for k in self.__fields__:
-            yield k, self[k]
+        ---
+
+        Removes any suffixed underscores from field names (`_`).
+
+        """
+
+        for k, v in self.to_dict().items():
+            yield k, v
 
     @classmethod
     def keys(cls) -> typing.Iterator[str]:
-        """Return an iterator of keys like a dict."""
+        """
+        Return an iterator of keys like a dict.
+
+        ---
+
+        Removes any suffixed underscores from field names (`_`).
+
+        """
 
         for field in cls.__fields__:
-            yield field
+            yield field.removesuffix('_')
 
     def setdefault(self, key: str, value: typing.Any) -> None:
         """Set value for key if unset; otherwise do nothing."""
@@ -616,18 +651,26 @@ class Base(metaclass=Meta):
         include_null: bool = True,
         ) -> dict:
         """
-        Return Object as a dict.
+        Same as `dict(Object)`, but gives fine-grained control over \
+        casing and inclusion of `null` values.
+
+        ---
 
         If specified, keys may optionally be converted to camelCase.
 
-        Null values may be discarded as well, if specified.
+        `None` values may optionally be discarded as well.
+
+        ---
+
+        Removes any suffixed underscores from field names (`_`).
+
         """
 
         d = {
             k: v
-            for k, v
-            in self
-            if v is not None
+            for k
+            in self.__fields__
+            if (v := self[k]) is not None
             or (include_null and v is None)
             }
         dbo: dict[str, typing.Any] = {}

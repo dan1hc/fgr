@@ -182,6 +182,7 @@ minor_tags = [
     "refactor",
     ]
 patch_tags = [
+    "build",
     "fix",
     "perf",
     ]

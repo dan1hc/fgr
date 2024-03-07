@@ -207,7 +207,7 @@ assert query.to_dict() == {
       'and': [
         {
           'eq': 'dog',
-          'field': 'type_',
+          'field': 'type',
           'limit': None,
           'sorting': []
         },

@@ -45,11 +45,11 @@ class TestObjectDocumentationExamples(unittest.TestCase):
 
     def setUp(self) -> None:
         self.instance_values = {
-            'id_': 'abc123',
+            'id': 'abc123',
             '_alternate_id': 'dog1',
             'name': 'Bob',
             'type': 'dog',
-            'in_': 'timeout',
+            'in': 'timeout',
             'is_tail_wagging': False
             }
         self.new_name = 'Buddy'
