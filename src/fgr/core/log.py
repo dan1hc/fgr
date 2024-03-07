@@ -62,7 +62,8 @@ Usage Examples
 
 ```py
 import fgr
-.log.debug('example')
+
+fgr.log.debug('example')
 # >>>
 # {
 #   "level": DEBUG,
@@ -72,7 +73,8 @@ import fgr
 #     "message": "example"
 #   }
 # }
-.log.info({'str': 'example', 'a': 2})
+
+fgr.log.info({'str': 'example', 'a': 2})
 # >>>
 # {
 #   "level": INFO,
@@ -96,7 +98,8 @@ class Pet(fgr.Object):
     in_: fgr.Field[str]
     is_tail_wagging: fgr.Field[bool] = True
 
-.log.debug(Pet)
+
+fgr.log.debug(Pet)
 # >>>
 # {
 #   "level": DEBUG,
@@ -105,15 +108,16 @@ class Pet(fgr.Object):
 #   "data":   {
 #     "Pet": {
 #       "_alternate_id": "Field[str]",
-#       "id_": "Field[str]",
-#       "in_": "Field[str]",
+#       "id": "Field[str]",
+#       "in": "Field[str]",
 #       "is_tail_wagging": "Field[bool]",
 #       "name": "Field[str]",
 #       "type": "Field[str]"
 #     }
 #   }
 # }
-.log.debug(
+
+fgr.log.debug(
     Pet(
         id_='abc1234',
         name='Fido',
@@ -128,8 +132,8 @@ class Pet(fgr.Object):
 #   "data":   {
 #     "Pet": {
 #       "_alternate_id": null,
-#       "id_": "abc1234",
-#       "in_": null,
+#       "id": "abc1234",
+#       "in": null,
 #       "is_tail_wagging": true,
 #       "name": "Fido",
 #       "type": "dog"
