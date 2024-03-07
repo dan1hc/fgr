@@ -11,6 +11,7 @@ __all__ = (
     'get_reference',
     'is_array_type',
     'is_field_type',
+    'is_obj_array_type',
     'is_primitive',
     'is_public_field',
     'is_snake_case',
@@ -37,6 +38,9 @@ from . import dtypes
 from . import exceptions
 from . import modules
 from . import patterns
+
+if typing.TYPE_CHECKING:
+    from . import meta
 
 
 class Constants(constants.PackageConstants):  # noqa
@@ -515,6 +519,18 @@ def is_array_type(value: typing.Any) -> typing.TypeGuard[dtypes.Array]:
     """True if Array."""
 
     return isinstance(value, typing.get_args(dtypes.Array))
+
+
+def is_obj_array_type(
+    value: typing.Any
+    ) -> typing.TypeGuard[typing.Iterable['meta.Base']]:
+    """True if Array[Base]."""
+
+    if is_array_type(value) and len(value) > 0:
+        for v in value:
+            return isinstance(v, modules.Modules().meta.Base)  # type: ignore[attr-defined]
+
+    return False
 
 
 def is_field_type(value: typing.Any) -> typing.TypeGuard[dtypes.FieldType]:

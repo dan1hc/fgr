@@ -169,7 +169,7 @@ class Field(  # type: ignore[misc]
         self._validate_container_comparison(value)
         q: 'query.ContainsQueryCondition' = (
             modules.Modules().query.ContainsQueryCondition(  # type: ignore[attr-defined]
-                field=self.name,
+                field=self.name.rstrip('_'),
                 contains=value
                 )
             )
@@ -191,7 +191,7 @@ class Field(  # type: ignore[misc]
         self._validate_comparison(value)
         q: 'query.EqQueryCondition' = (
             modules.Modules().query.EqQueryCondition(  # type: ignore[attr-defined]
-                field=self.name,
+                field=self.name.rstrip('_'),
                 eq=value
                 )
             )
@@ -213,7 +213,7 @@ class Field(  # type: ignore[misc]
         self._validate_comparison(value)
         q: 'query.NeQueryCondition' = (
             modules.Modules().query.NeQueryCondition(  # type: ignore[attr-defined]
-                field=self.name,
+                field=self.name.rstrip('_'),
                 ne=value
                 )
             )
@@ -231,7 +231,7 @@ class Field(  # type: ignore[misc]
         self._validate_comparison(value)
         q: 'query.SimilarQueryCondition' = (
             modules.Modules().query.SimilarQueryCondition(  # type: ignore[attr-defined]
-                field=self.name,
+                field=self.name.rstrip('_'),
                 like=value,
                 threshold=threshold
                 )
@@ -242,7 +242,7 @@ class Field(  # type: ignore[misc]
         self._validate_comparison(value)
         q: 'query.GtQueryCondition' = (
             modules.Modules().query.GtQueryCondition(  # type: ignore[attr-defined]
-                field=self.name,
+                field=self.name.rstrip('_'),
                 gt=value
                 )
             )
@@ -252,7 +252,7 @@ class Field(  # type: ignore[misc]
         self._validate_comparison(value)
         q: 'query.GeQueryCondition' = (
             modules.Modules().query.GeQueryCondition(  # type: ignore[attr-defined]
-                field=self.name,
+                field=self.name.rstrip('_'),
                 ge=value
                 )
             )
@@ -262,7 +262,7 @@ class Field(  # type: ignore[misc]
         self._validate_comparison(value)
         q: 'query.LtQueryCondition' = (
             modules.Modules().query.LtQueryCondition(  # type: ignore[attr-defined]
-                field=self.name,
+                field=self.name.rstrip('_'),
                 lt=value
                 )
             )
@@ -272,7 +272,7 @@ class Field(  # type: ignore[misc]
         self._validate_comparison(value)
         q: 'query.LeQueryCondition' = (
             modules.Modules().query.LeQueryCondition(  # type: ignore[attr-defined]
-                field=self.name,
+                field=self.name.rstrip('_'),
                 le=value
                 )
             )

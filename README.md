@@ -1,15 +1,16 @@
 # fgr
 
+[![MinVersion](https://img.shields.io/python/required-version-toml?tomlFilePath=https://raw.githubusercontent.com/dan1hc/fgr/main/pyproject.toml&color=gold)](https://pypi.org/project/fgr)
 [![PyVersions](https://img.shields.io/pypi/pyversions/fgr?color=brightgreen)](https://pypi.org/project/fgr)
-[![CI](https://github.com/dan1hc/fgr/actions/workflows/main.yml/badge.svg?branch=main&event=push)](https://github.com/dan1hc/fgr/actions)
 [![OpenSSF](https://img.shields.io/cii/level/8565)](https://www.bestpractices.dev/projects/8565)
+[![CI](https://github.com/dan1hc/fgr/actions/workflows/main.yml/badge.svg?branch=main&event=push)](https://github.com/dan1hc/fgr/actions)
+[![codeql](https://github.com/dan1hc/fgr/workflows/codeql/badge.svg)](https://github.com/dan1hc/fgr/actions/workflows/codeql.yml)
 [![coverage](https://img.shields.io/badge/dynamic/toml?url=https://raw.githubusercontent.com/dan1hc/fgr/main/pyproject.toml&query=tool.coverage.report.fail_under&label=coverage&suffix=%25&color=brightgreen)](https://github.com/dan1hc/fgr/actions)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![mypy](https://www.mypy-lang.org/static/mypy_badge.svg)](http://mypy-lang.org/)
-[![MinVersion](https://img.shields.io/python/required-version-toml?tomlFilePath=https://raw.githubusercontent.com/dan1hc/fgr/main/pyproject.toml&color=gold)](https://pypi.org/project/fgr)
-[![PyPI](https://img.shields.io/pypi/v/fgr)](https://pypi.org/project/fgr)
-[![License](https://img.shields.io/pypi/l/fgr)](https://www.gnu.org/licenses/lgpl-3.0)
+[![PyPI](https://img.shields.io/pypi/v/fgr?color=blue)](https://pypi.org/project/fgr)
+[![License](https://img.shields.io/pypi/l/fgr?color=blue)](https://www.gnu.org/licenses/lgpl-3.0)
 
 # Overview
 
@@ -164,10 +165,10 @@ request_body = {
     }
 pet = Pet(request_body)
 
-assert pet.is_snake_case == Pet.is_snake_case == True
-assert pet.isCamelCase == Pet.isCamelCase == False
+assert pet.is_snake_case == Pet.is_snake_case is True
+assert pet.isCamelCase == Pet.isCamelCase is False
 assert pet['alternate_id'] == pet._alternate_id == request_body['alternateId']
-assert dict(pet) == {k: v for k, v in pet.items()}
+assert dict(pet) == {k: v for k, v in pet.items()} == pet.to_dict()
 
 # Automatic, mutation-safe "default factory".
 dog = Pet(id='abc321', alternate_id=321, name='Fido')
@@ -200,42 +201,42 @@ query = (
     | Pet.name % ('fido', 0.75)
     )
 query += 'name'
-assert query.to_dict() == {
-  'limit': None,
-  'or': [
-    {
-      'and': [
+assert dict(query) == {
+    'limit': None,
+    'or': [
         {
-          'eq': 'dog',
-          'field': 'type',
-          'limit': None,
-          'sorting': []
-        },
+            'and': [
+                {
+                    'eq': 'dog',
+                    'field': 'type',
+                    'limit': None,
+                    'sorting': []
+                    },
+                {
+                    'eq': 'Fido',
+                    'field': 'name',
+                    'limit': None,
+                    'sorting': []
+                    }
+                ],
+            'limit': None,
+            'sorting': []
+            },
         {
-          'eq': 'Fido',
-          'field': 'name',
-          'limit': None,
-          'sorting': []
-        }
-      ],
-      'limit': None,
-      'sorting': []
-    },
-    {
-      'field': 'name',
-      'like': 'fido',
-      'limit': None,
-      'sorting': [],
-      'threshold': 0.75
+            'field': 'name',
+            'like': 'fido',
+            'limit': None,
+            'sorting': [],
+            'threshold': 0.75
+            }
+        ],
+    'sorting': [
+        {
+            'direction': 'asc',
+            'field': 'name'
+            }
+        ]
     }
-  ],
-  'sorting': [
-    {
-      'direction': 'asc',
-      'field': 'name'
-    }
-  ]
-}
 
 ```
 

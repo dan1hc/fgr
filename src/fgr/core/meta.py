@@ -4,7 +4,9 @@ __all__ = (
     )
 
 import copy
+import inspect
 import json
+import types
 import typing
 import sys
 
@@ -379,7 +381,7 @@ class Meta(type):
         """
 
         for name in cls.__fields__:
-            yield name.removesuffix('_'), cls[name]
+            yield name.rstrip('_'), cls[name]
 
     def update(cls, other: dtypes.MetaType) -> None:
         """Update fields like a dict."""
@@ -447,7 +449,33 @@ class Base(metaclass=Meta):
         """Return field value dict style."""
 
         if (k := utils.key_for(self, key)):
-            return getattr(self, k)
+            value = getattr(self, k)
+            if (
+                (
+                    (is_obj := isinstance(value, Base))
+                    or utils.is_obj_array_type(value)
+                    )
+                and (
+                    callers := typing.cast(
+                        types.FrameType,
+                        typing.cast(
+                            types.FrameType,
+                            inspect.currentframe()
+                            ).f_back
+                        ).f_code.co_names
+                    )
+                and 'dict' in callers
+                and (
+                    callers[0] == 'dict'
+                    or callers[callers.index('dict') - 1] != 'to_dict'
+                    )
+                ):
+                if is_obj:
+                    return value.to_dict()  # type: ignore[union-attr]
+                else:
+                    return value.__class__(obj.to_dict() for obj in value)  # type: ignore[arg-type, call-arg, union-attr]
+            else:
+                return value
         else:
             raise KeyError(key)
 
@@ -614,7 +642,7 @@ class Base(metaclass=Meta):
         """
 
         for field in cls.__fields__:
-            yield field.removesuffix('_')
+            yield field.rstrip('_')
 
     def setdefault(self, key: str, value: typing.Any) -> None:
         """Set value for key if unset; otherwise do nothing."""
@@ -649,7 +677,7 @@ class Base(metaclass=Meta):
         self,
         camel_case: bool = False,
         include_null: bool = True,
-        ) -> dict:
+        ) -> dict[str, typing.Any]:
         """
         Same as `dict(Object)`, but gives fine-grained control over \
         casing and inclusion of `null` values.
@@ -722,7 +750,7 @@ class Base(metaclass=Meta):
                 }
         else:
             dbo = {
-                k.removesuffix('_'): v
+                k.rstrip('_'): v
                 for k, v
                 in dbo.items()
                 }
