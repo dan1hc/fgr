@@ -14,9 +14,10 @@ on:
       - '*.toml'
       - '*.yaml'
       - '.gitignore'
-      - '.github/workflows/*.yml'
+      - '.github/**/*'
       - 'docs/*'
       - 'src/fgr/__init__.py'
+      - 'CODE_OF_CONDUCT'
       - 'LICENSE'
 
 env:
@@ -36,6 +37,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: validate commit msg
+        uses: ./.github/actions/validate-commit-message
       - name: Set up Python Latest
         uses: actions/setup-python@v5
         with:

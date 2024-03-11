@@ -9,7 +9,7 @@ repos:
         stages: [commit-msg]
         name: validate-commit-msg
         language: pygrep
-        entry: ^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|¯\\_\(ツ\)_\/¯)(\(\w+\)?((?=:\s)|(?=!:\s)))?(!)?(:\s\_\_.*\_\_)?|^(Merge \w+)
+        entry: ^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\(\w+\))?((?=:\s)|(?=!:\s))?(!)?(:\s\_\_.*\_\_)($|( *\n\n)(.+)?(\n\n)((resolve[ds]? \#\d+|fix(ed|es)? \#\d+|close[ds]? \#\d+)(, )?)+$)
         args: [--negate]
       - id: pytest
         stages: [pre-commit]

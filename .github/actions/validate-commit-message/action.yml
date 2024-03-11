@@ -1,0 +1,5 @@
+name: 'Validate Commit Message'
+description: 'Validate commit message.'
+runs:
+  using: 'node20'
+  main: 'index.js'
