@@ -1,7 +1,7 @@
 Contributing
 ============
 
-Read our [Code of Conduct](https://github.com/dan1hc/fgr/blob/main/CODE_OF_CONDUCT).
+Read our [Code of Conduct](https://github.com/dan1hc/fgr/blob/main/CODE_OF_CONDUCT.md).
 
 * Step 1 - [Create New Issue](https://github.com/dan1hc/fgr/issues/new)
 * Step 2 - Create New Branch (Corresponding to New Issue)
