@@ -1,8 +1,8 @@
-name: 'Validate Commit Message'
+name: 'validate-commit-message'
 description: 'Validate commit message.'
 inputs:
   token:
-    description: 'secrets.GITHUB_TOKEN'
+    description: GITHUB_TOKEN
     required: true
 runs:
   using: 'node20'
