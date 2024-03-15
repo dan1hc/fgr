@@ -32,11 +32,7 @@ from .. import docs
 class Constants(core.constants.PackageConstants):  # noqa
 
     DOCS_STATIC_DIR = os.path.join(
-        os.path.split(
-            os.path.normpath(
-                __file__.removesuffix('__init__.py')
-                )
-            )[0],
+        os.path.split(os.path.dirname(__file__))[0],
         'docs',
         'static',
         )

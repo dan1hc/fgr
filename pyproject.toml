@@ -55,10 +55,10 @@ docs = [
 fgr = "fgr.commands:main"
 
 [tool.setuptools.package-data]
-"fgr.docs" = [
-    "fgr.docs.static:*.ico",
-    "fgr.docs.static:*.png",
-    "fgr.docs.static:*.tpl",
+"*" = [
+    "**/static/*.ico",
+    "**/static/*.png",
+    "**/static/*.tpl",
     ]
 
 [tool.coverage.report]
