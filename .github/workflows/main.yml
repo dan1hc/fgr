@@ -35,6 +35,7 @@ jobs:
   lint:
     needs: setup
     runs-on: ubuntu-latest
+    permissions: read-all
     steps:
       - uses: actions/checkout@v4
       - name: Install npm deps
