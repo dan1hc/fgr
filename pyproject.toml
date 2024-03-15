@@ -31,6 +31,7 @@ classifiers = [
     ]
 
 [project.urls]
+Documentation = "https://fgr.readthedocs.io"
 Homepage = "https://pypi.org/projects/fgr"
 Repository = "https://github.com/dan1hc/fgr.git"
 Issues = "https://github.com/dan1hc/fgr/issues"
