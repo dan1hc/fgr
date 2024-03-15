@@ -13,5 +13,5 @@ build:
         --author dan@1howardcapital.com \
         --version $(fgr --version) \
         --site-map-url https://fgr.readthedocs.io/en/latest
-    - mkdir --parents $READTHEDOCS_OUTPUT/html/
-    - cp -r docs/* $READTHEDOCS_OUTPUT/html/
+    - mkdir -p $READTHEDOCS_OUTPUT/html/
+    - cp -r docs/html/ $READTHEDOCS_OUTPUT
