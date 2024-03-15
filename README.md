@@ -1,8 +1,9 @@
-# [![banner](https://1howardcapital.s3.amazonaws.com/images/fgr/banner.png)](https://github.com/dan1hc/fgr)
+# [![banner](https://1howardcapital.s3.amazonaws.com/images/fgr/banner.png)](https://fgr.readthedocs.io)
 
 [![MinVersion](https://img.shields.io/python/required-version-toml?tomlFilePath=https://raw.githubusercontent.com/dan1hc/fgr/main/pyproject.toml&color=gold)](https://pypi.org/project/fgr)
 [![PyVersions](https://img.shields.io/pypi/pyversions/fgr?color=brightgreen)](https://pypi.org/project/fgr)
 [![OpenSSF](https://www.bestpractices.dev/projects/8565/badge)](https://www.bestpractices.dev/projects/8565)
+[![readthedocs](https://readthedocs.org/projects/fgr/badge)](https://fgr.readthedocs.io)
 [![CI](https://github.com/dan1hc/fgr/actions/workflows/main.yml/badge.svg?branch=main&event=push)](https://github.com/dan1hc/fgr/actions)
 [![codeql](https://github.com/dan1hc/fgr/workflows/codeql/badge.svg)](https://github.com/dan1hc/fgr/actions/workflows/codeql.yml)
 [![coverage](https://img.shields.io/badge/dynamic/toml?url=https://raw.githubusercontent.com/dan1hc/fgr/main/pyproject.toml&query=tool.coverage.report.fail_under&label=coverage&suffix=%25&color=brightgreen)](https://github.com/dan1hc/fgr/actions)

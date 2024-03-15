@@ -71,7 +71,7 @@ Additionally, commit messages must adhere to [angular commit guidelines](https:/
 ```py
 import re
 
-pattern = re.compile(r'^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\(\w+\))?((?=:\s)|(?=!:\s))?(!)?(:\s\_\_.*\_\_)($|( *\n\n)(.+)?(\n\n)((resolve[ds]? \#\d+|fix(ed|es)? \#\d+|close[ds]? \#\d+)(, )?)+$)')
+pattern = re.compile(r'^(Merge .*)|^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\(\w+\))?((?=:\s)|(?=!:\s))?(!)?(:\s\_\_.*\_\_)($|( *\n\n)(.+)?(\n\n)((resolve[ds]? \#\d+|fix(ed|es)? \#\d+|close[ds]? \#\d+)(, )?)+$)')
 
 assert bool(pattern.match('feat!: __valid_example__\n\noptional body text\n\ncloses #1, resolve #2')) is True
 assert bool(pattern.match('test: __short_valid_example__')) is True
