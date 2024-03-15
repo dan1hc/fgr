@@ -39,9 +39,12 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install npm deps
         run: |
-          npm i @actions/core @actions/github octokit
+          npm i @actions/core @actions/github
       - name: validate commit msg
+        if: github.event_name == 'pull_request'
         uses: ./.github/actions/validate-commit-message
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Set up Python Latest
         uses: actions/setup-python@v5
         with:

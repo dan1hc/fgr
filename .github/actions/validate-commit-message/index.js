@@ -1,10 +1,10 @@
 const core = require("@actions/core");
 const github = require("@actions/github");
-const octokit = require("octokit");
 
 const pattern = /^(Merge .*)|^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\(\w+\))?((?=:\s)|(?=!:\s))?(!)?(:\s\_\_.*\_\_)($|( *\n\n)(.+)?(\n\n)((resolve[ds]? \#\d+|fix(ed|es)? \#\d+|close[ds]? \#\d+)(, )?)+$)/;
 
-const restClient = new octokit.Octokit();
+const restClient = github.getOctokit(core.getInput('token'));
+
 restClient.rest.pulls.listCommits(
     {
         owner: github.context.repo.owner,
