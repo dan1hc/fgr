@@ -1,5 +1,13 @@
 name: main
 
+permissions:
+  actions: write
+  contents: write
+  deployments: write
+  id-token: write
+  pull-requests: write
+  statuses: read
+
 on:
   pull_request:
     branches:
@@ -32,7 +40,7 @@ jobs:
       - id: setVariables
         run: |
           echo "python-versions=${{ toJson(env.PY_VERSIONS) }}" >> $GITHUB_OUTPUT
-  lint:
+  validate:
     needs: setup
     runs-on: ubuntu-latest
     steps:
@@ -45,6 +53,11 @@ jobs:
         uses: ./.github/actions/validate-commit-message
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+  lint:
+    needs: [setup, validate]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
       - name: Set up Python Latest
         uses: actions/setup-python@v5
         with:
@@ -66,7 +79,7 @@ jobs:
             --show-source \
             --exit-non-zero-on-fix
   test:
-    needs: [setup, lint]
+    needs: [setup, validate, lint]
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -88,7 +101,7 @@ jobs:
       - name: pytest
         run: pytest --verbose
   release:
-    needs: [setup, lint, test]
+    needs: [setup, validate, lint, test]
     name: semantic release
     runs-on: ubuntu-latest
     concurrency: push
@@ -96,12 +109,6 @@ jobs:
     environment:
       name: pypi
       url: https://pypi.org/p/fgr
-    permissions:
-      actions: write
-      contents: write
-      deployments: write
-      id-token: write
-      pull-requests: write
     steps:
       - uses: actions/checkout@v4
         with:
