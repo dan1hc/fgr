@@ -26,13 +26,7 @@ env:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    permissions:
-      actions: write
-      contents: write
-      deployments: write
-      id-token: write
-      pull-requests: write
-      statuses: read
+    permissions: write-all
     steps:
       - uses: actions/github-script@v7
         if: github.event_name == 'pull_request'
