@@ -1,17 +1,8 @@
-console.log("DOING IMPORTS");
-
 const core = require("@actions/core");
 const github = require("@actions/github");
 
-console.log("DOING REGEX COMPILE");
-
 const pattern = /^(Merge .*)|^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\(\w+\))?((?=:\s)|(?=!:\s))?(!)?(:\s\_\_.*\_\_)($|( *\n\n)(.+)?(\n\n)((resolve[ds]? \#\d+|fix(ed|es)? \#\d+|close[ds]? \#\d+)(, )?)+$)/;
-
-console.log("DOING CONNECT REST CLIENT");
-
 const restClient = github.getOctokit(core.getInput('token'));
-
-console.log(`PULL REQUEST #: ${github.context.payload.pull_request.number}`);
 
 restClient.rest.pulls.listCommits(
     {

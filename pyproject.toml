@@ -68,8 +68,8 @@ exclude_lines = [
     "if typing.TYPE_CHECKING:",
     ]
 omit = [
-    "./src/fgr/commands/**",
-    "./src/fgr/docs/**",
+    "**/src/fgr/commands/**",
+    "**/src/fgr/docs/**",
     ]
 
 [tool.pytest.ini_options]
