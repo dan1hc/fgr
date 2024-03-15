@@ -165,7 +165,10 @@ docs_parser.add_argument(
     '--index-from-readme',
     nargs='?',
     dest='readme_path',
-    help='specify path to README.md file to use for index instead of {package}',
+    help=(
+        'specify path to README.md file to use'
+        ' for index instead of {package}'
+        ),
     const=os.path.join('.', 'README.md'),
     default=None,
     )
@@ -174,6 +177,29 @@ docs_parser.add_argument(
     action='store_true',
     dest='no_include_meta_tags',
     help='include to disable auto-generation of meta tags for documentation',
+    )
+docs_parser.add_argument(
+    '--no-robots-txt',
+    action='store_true',
+    dest='no_include_robots',
+    help='include to disable auto-generation of robots.txt file',
+    )
+docs_parser.add_argument(
+    '--site-map-url',
+    help='\n'.join(
+        (
+            (
+                'specify full url path to the documentation version to be'
+                'included in an auto-generated xml sitemap'
+                ),
+            '',
+            'ex. https://example.readthedocs.io/en/latest',
+            '',
+            'can be repeated to include multiple versions'
+            )
+        ),
+    action='append',
+    dest='site_map_urls',
     )
 docs_parser.set_defaults(func=docs.commands.document)
 

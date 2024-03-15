@@ -5,11 +5,13 @@ __all__ = (
     )
 
 import configparser
+import datetime
 import os
 import re
 import shutil
 import string
 import typing
+import urllib.parse
 
 from ... import commands
 from ... import core
@@ -23,6 +25,35 @@ class Constants(core.constants.PackageConstants):
     MODULE_PATTERN = re.compile(r'^(\.\. automodule:: )')
     PATH_PATTERN   = re.compile(r'(\/|\\)')
     PREFIX_PATTERN = re.compile(r'^(\.)?(\/|\\)?((src)(\/|\\))?')
+
+    NO_CRAWL_PATHS = (
+        'Disallow: /search/',
+        'Disallow: /api/',
+        'Disallow: /builds/',
+        )
+    KNOWN_CRAWLERS: dict[str, tuple[str, ...]] = {
+        'GOOGL': (
+            'AdsBot-Google',
+            'AdsBot-Google-Mobile',
+            'APIs-Google',
+            'Google-Extended',
+            'Google-InspectionTool',
+            'Google-Safety',
+            'Googlebot',
+            'Googlebot-Image',
+            'Googlebot-News',
+            'Googlebot-Video',
+            'GoogleOther',
+            'Mediapartners-Google',
+            'Storebot-Google',
+            ),
+        'MSFT': (
+            'AdIdxBot',
+            'Bingbot',
+            'BingPreview',
+            'MicrosoftPreview',
+            )
+        }
 
 
 def _do_api_doc(
@@ -124,6 +155,8 @@ def document(
     make_index: bool,
     readme_path: typing.Optional[str],
     no_include_meta_tags: bool,
+    no_include_robots: bool,
+    site_map_urls: list[str],
     ) -> None:
     """
     CLI entrypoint for documenting a python package in wiki style.
@@ -298,14 +331,100 @@ def document(
 
     _do_build(output_dir)
 
-    # TODO: Optionally Include sitemap.
-    # <?xml version="1.0" encoding="UTF-8"?>
-    # <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    # <url>
-    #     <loc>https://www.example.com/foo.html</loc>
-    #     <lastmod>2022-06-04</lastmod>
-    # </url>
-    # </urlset>
+    # Optionally Include sitemap.
+    if site_map_urls:
+        html_dir = os.path.join(output_dir, 'docs', 'html')
+        pages: list[str] = [
+            html_file_name
+            for html_file_name
+            in os.listdir(html_dir)
+            if (
+                html_file_name.endswith('.html')
+                and (
+                    html_file_name.startswith(package_root)
+                    or html_file_name.startswith('index')
+                    )
+                )
+            ]
+        page_depths = [
+            len(page_name.split('.'))
+            for page_name
+            in pages
+            ]
+        min_depth = min(page_depths)
+        max_depth = max(page_depths)
+        lastmod = datetime.datetime.now(datetime.timezone.utc).isoformat()
+        changefreq = 'daily'
+
+        url_set: list[str] = [
+            (
+                '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"'
+                ' xmlns:xhtml="http://www.w3.org/1999/xhtml">'
+                ),
+            ]
+        for site_map_url in site_map_urls:
+            parsed = urllib.parse.urlparse(site_map_url)
+            for page in pages:
+                page_depth = len(page.split('.'))
+                page_loc = '/'.join((site_map_url.rstrip('/'), page))
+                priority = (max_depth - page_depth + min_depth) / max_depth
+                xml_url = '\n'.join(
+                    (
+                        '<url>',
+                        f'    <loc>{page_loc}</loc>',
+                        f'    <changefreq>{changefreq}</changefreq>',
+                        f'    <lastmod>{lastmod}</lastmod>',
+                        f'    <priority>{priority!s}</priority>',
+                        '</url>',
+                        )
+                    )
+                url_set.append(xml_url)
+
+        xml_path = os.path.join(output_dir, 'docs', 'html', 'sitemap.xml')
+        with open(xml_path, 'w') as xml_file:
+            xml_file.write(
+                '\n'.join(
+                    (
+                        '<?xml version="1.0" encoding="UTF-8"?>',
+                        *url_set,
+                        '</urlset>'
+                        )
+                    )
+                )
+
+    # Include robotos.txt unless otherwise specified.
+    # Note: if included, only allows GOOGLE and MICROSOFT crawlers.
+    if not no_include_robots:
+        robots_path = os.path.join(output_dir, 'docs', 'html', 'robots.txt')
+        with open(robots_path, 'w') as robots_file:
+            robots_txt = '\n'.join(
+                (
+                    'User-agent: *',
+                    'Disallow: /',
+                    *(
+                        '\n'.join(
+                            (
+                                '\n'.join(
+                                    (
+                                        '',
+                                        f'User-agent: {agent}',
+                                        *Constants.NO_CRAWL_PATHS,
+                                        )
+                                    )
+                                for agent
+                                in agents
+                                )
+                            )
+                        for agents
+                        in Constants.KNOWN_CRAWLERS.values()
+                        ),
+                    )
+                )
+            if site_map_urls:
+                parsed = urllib.parse.urlparse(site_map_urls[0])
+                url_root = '://'.join((parsed.scheme, parsed.hostname))
+                robots_txt += f'\n\nSitemap: {url_root}/sitemap.xml'
+            robots_file.write(robots_txt)
 
     # Inject readme.md if exists.
     if readme_path:
