@@ -1,13 +1,5 @@
 name: main
 
-permissions:
-  actions: write
-  contents: write
-  deployments: write
-  id-token: write
-  pull-requests: write
-  statuses: read
-
 on:
   pull_request:
     branches:
@@ -32,29 +24,58 @@ env:
   PY_VERSIONS: "[\"3.12\",\"3.11\",\"3.10\"]"
 
 jobs:
-  setup:
+  validate:
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        if: github.event_name == 'pull_request'
+        with:
+          script: |
+            github.rest.pulls.listCommits(
+            {
+                owner: context.repo.owner,
+                repo: context.repo.name,
+                per_page: 100,
+                pull_number: context.payload.pull_request.number
+                }
+            ).then((response) => {
+                if (response.data.length >= 100) {
+                    core.setFailed("Pull request must contain fewer than 100 commits.");
+                } else {
+                    response.data.every((record) => {
+                        var commit = record.commit;
+                        console.log(`COMMITTER: ${commit.committer.name}`);
+                        console.log(`MESSAGE: ${commit.message}`);
+                        if (
+                            commit.committer.name == "GitHub"
+                            || commit.committer.name == "github-actions"
+                            || pattern.test(commit.message)
+                            ) {
+                            console.log("VALID");
+                            console.log("");
+                            return true
+                        } else {
+                            core.setFailed(`INVALID: ${commit.message}`);
+                            return false
+                        };
+                    });
+                };
+            }, (error) => {
+                core.setFailed(error);
+                }
+            );
+  setup:
+    needs: validate
+    runs-on: ubuntu-latest
+    if: always() && !failure() && !cancelled()
     outputs:
       python-versions: ${{ steps.setVariables.outputs.python-versions }}
     steps:
       - id: setVariables
         run: |
           echo "python-versions=${{ toJson(env.PY_VERSIONS) }}" >> $GITHUB_OUTPUT
-  validate:
-    needs: setup
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install npm deps
-        run: |
-          npm i @actions/core @actions/github
-      - name: validate commit msg
-        if: github.event_name == 'pull_request'
-        uses: ./.github/actions/validate-commit-message
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
   lint:
-    needs: [setup, validate]
+    needs: [setup]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -79,7 +100,7 @@ jobs:
             --show-source \
             --exit-non-zero-on-fix
   test:
-    needs: [setup, validate, lint]
+    needs: [setup, lint]
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -101,7 +122,7 @@ jobs:
       - name: pytest
         run: pytest --verbose
   release:
-    needs: [setup, validate, lint, test]
+    needs: [setup, lint, test]
     name: semantic release
     runs-on: ubuntu-latest
     concurrency: push
@@ -109,6 +130,12 @@ jobs:
     environment:
       name: pypi
       url: https://pypi.org/p/fgr
+    permissions:
+      actions: write
+      contents: write
+      deployments: write
+      id-token: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
         with:
