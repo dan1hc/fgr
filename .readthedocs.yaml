@@ -11,10 +11,10 @@ build:
   tools:
     python: "3.12"
   commands:
-    - pip install ".[docs]"
-    - fgr docs . \
-      --index-from-readme \
-      --include-private-modules \
-      --author dan@1howardcapital.com \
-      --version $(fgr --version)
+    - |
+      fgr docs . \
+        --index-from-readme \
+        --include-private-modules \
+        --author dan@1howardcapital.com \
+        --version $(fgr --version)
     - mv ./docs/html/ $READTHEDOCS_OUTPUT/html/
