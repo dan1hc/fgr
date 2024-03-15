@@ -40,7 +40,7 @@ class TestLogger(unittest.TestCase):
                 default=fgr.core.utils.convert_for_representation,
                 indent=Constants.INDENT,
                 sort_keys=True
-                ) + '\n',
+                ),
             Constants.INDENT * ' '
             )
         with self.assertLogs(self.log, level) as logger:
@@ -58,7 +58,7 @@ class TestLogger(unittest.TestCase):
                 default=fgr.core.utils.convert_for_representation,
                 indent=Constants.INDENT,
                 sort_keys=True
-                ) + '\n',
+                ),
             Constants.INDENT * ' '
             )
         with self.assertLogs(self.log, level) as logger:
@@ -76,7 +76,7 @@ class TestLogger(unittest.TestCase):
                 default=fgr.core.utils.convert_for_representation,
                 indent=Constants.INDENT,
                 sort_keys=True
-                ) + '\n',
+                ),
             Constants.INDENT * ' '
             )
         with self.assertLogs(self.log, level) as logger:
@@ -94,7 +94,7 @@ class TestLogger(unittest.TestCase):
                 default=fgr.core.utils.convert_for_representation,
                 indent=Constants.INDENT,
                 sort_keys=True
-                ) + '\n',
+                ),
             Constants.INDENT * ' '
             )
         with self.assertLogs(self.log, level) as logger:
@@ -112,14 +112,13 @@ class TestLogger(unittest.TestCase):
                 _ = 1 / 0
             except Exception:
                 fgr.log.error(msg)
-                parsed['traceback'] = traceback.format_exc()
                 expected_output = textwrap.indent(
                     json.dumps(
                         parsed,
                         default=fgr.core.utils.convert_for_representation,
                         indent=Constants.INDENT,
                         sort_keys=True
-                        ) + '\n',
+                        ),
                     Constants.INDENT * ' '
                     )
             self.assertEqual(logger.records[0].msg, expected_output)
@@ -135,14 +134,13 @@ class TestLogger(unittest.TestCase):
                 _ = 1 / 0
             except Exception as e:
                 self.log.debug(msg, exc_info=e)
-                parsed['traceback'] = traceback.format_exc()
                 expected_output = textwrap.indent(
                     json.dumps(
                         parsed,
                         default=fgr.core.utils.convert_for_representation,
                         indent=Constants.INDENT,
                         sort_keys=True
-                        ) + '\n',
+                        ),
                     Constants.INDENT * ' '
                     )
             self.assertEqual(logger.records[0].msg, expected_output)
@@ -164,7 +162,7 @@ class TestLogger(unittest.TestCase):
                     default=fgr.core.utils.convert_for_representation,
                     indent=Constants.INDENT,
                     sort_keys=True
-                    ) + '\n',
+                    ),
                 Constants.INDENT * ' '
                 )
             self.assertEqual(
@@ -217,7 +215,7 @@ class TestDeployedLogger(unittest.TestCase):
                     default=fgr.core.utils.convert_for_representation,
                     indent=Constants.INDENT,
                     sort_keys=True
-                    ) + '\n',
+                    ),
                 Constants.INDENT * ' '
                 )
             self.assertEqual(
@@ -265,7 +263,7 @@ class TestDeployedLogger(unittest.TestCase):
                     default=fgr.core.utils.convert_for_representation,
                     indent=Constants.INDENT,
                     sort_keys=True
-                    ) + '\n',
+                    ),
                 Constants.INDENT * ' '
                 )
             self.assertEqual(
@@ -287,7 +285,7 @@ class TestDeployedLogger(unittest.TestCase):
                     default=fgr.core.utils.convert_for_representation,
                     indent=Constants.INDENT,
                     sort_keys=True
-                    ) + '\n',
+                    ),
                 Constants.INDENT * ' '
                 )
             self.assertEqual(
@@ -331,4 +329,65 @@ class TestDeployedLogger(unittest.TestCase):
     def tearDown(self) -> None:
         fgr.log._log.cache_clear()
         fgr.core.constants.PackageConstants.ENV = 'local'
+        return super().tearDown()
+
+
+class TestTracedLogger(unittest.TestCase):
+    """Fixture for testing logger with tracing."""
+
+    def setUp(self) -> None:
+        fgr.log._log.cache_clear()
+        fgr.core.constants.PackageConstants.LOG_TRACE = True
+        self.log = fgr.log._log()
+        self.msg_str = 'example'
+        return super().setUp()
+
+    def test_01_log(self):
+        """Test exc logging."""
+
+        msg = self.msg_str
+        level = fgr.log.logging.ERROR
+        parsed = fgr.core.utils.parse_incoming_log_message(msg, level)
+        with self.assertLogs(self.log, level) as logger:
+            try:
+                _ = 1 / 0
+            except Exception:
+                fgr.log.error(msg)
+                parsed['traceback'] = traceback.format_exc()
+                expected_output = textwrap.indent(
+                    json.dumps(
+                        parsed,
+                        default=fgr.core.utils.convert_for_representation,
+                        indent=Constants.INDENT,
+                        sort_keys=True
+                        ),
+                    Constants.INDENT * ' '
+                    )
+            self.assertEqual(logger.records[0].msg, expected_output)
+
+    def test_02_log(self):
+        """Test exc logging - no trace for < ERROR."""
+
+        msg = self.msg_str
+        level = fgr.log.logging.DEBUG
+        parsed = fgr.core.utils.parse_incoming_log_message(msg, level)
+        with self.assertLogs(self.log, level) as logger:
+            try:
+                _ = 1 / 0
+            except Exception as e:
+                self.log.info(msg, exc_info=e)
+                expected_output = textwrap.indent(
+                    json.dumps(
+                        parsed,
+                        default=fgr.core.utils.convert_for_representation,
+                        indent=Constants.INDENT,
+                        sort_keys=True
+                        ),
+                    Constants.INDENT * ' '
+                    )
+            self.assertEqual(logger.records[0].msg, expected_output)
+
+    def tearDown(self) -> None:
+        fgr.log._log.cache_clear()
+        fgr.core.constants.PackageConstants.LOG_TRACE = False
         return super().tearDown()

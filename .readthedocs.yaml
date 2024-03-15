@@ -1,0 +1,21 @@
+version: 2
+
+python:
+  install:
+    - method: pip
+      path: .
+      extra_requirements:
+        - docs
+build:
+  os: ubuntu-22.04
+  tools:
+    python: "3.12"
+  commands:
+    - |
+      fgr docs . \
+        --index-from-readme \
+        --include-private-modules \
+        --author dan@1howardcapital.com \
+        --version $(fgr --version) \
+        --site-map-url https://fgr.readthedocs.io/en/latest
+    - mv ./docs/html/ $READTHEDOCS_OUTPUT/html/

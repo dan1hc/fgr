@@ -19,7 +19,7 @@ keywords = [
     "rest",
     ]
 readme = "README.md"
-version = "0.3.2"
+version = "0.4.0-rc.1"
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)",
@@ -31,6 +31,7 @@ classifiers = [
     ]
 
 [project.urls]
+Documentation = "https://fgr.readthedocs.io"
 Homepage = "https://pypi.org/projects/fgr"
 Repository = "https://github.com/dan1hc/fgr.git"
 Issues = "https://github.com/dan1hc/fgr/issues"
@@ -40,15 +41,24 @@ Changelog = "https://github.com/dan1hc/fgr/blob/main/CHANGELOG.md"
 develop = [
     "mypy",
     "pre-commit",
-    "coverage==7.*",
-    "pytest==8.*",
-    "pytest-cov==4.*",
-    "ruff==0.*",
+    "coverage",
+    "pytest",
+    "pytest-cov",
+    "ruff",
     ]
 docs = [
-    "commonmark==0.*",
-    "pydata_sphinx_theme==0.*",
+    "commonmark==0.9.*",
     "sphinx==7.*",
+    ]
+
+[project.scripts]
+fgr = "fgr.commands:main"
+
+[tool.setuptools.package-data]
+"fgr.docs" = [
+    "fgr.docs.static:*.ico",
+    "fgr.docs.static:*.png",
+    "fgr.docs.static:*.tpl",
     ]
 
 [tool.coverage.report]
@@ -56,6 +66,10 @@ fail_under = 100
 exclude_lines = [
     "pragma: no cover",
     "if typing.TYPE_CHECKING:",
+    ]
+omit = [
+    "**/fgr/commands/**",
+    "**/fgr/docs/**",
     ]
 
 [tool.pytest.ini_options]
@@ -77,6 +91,10 @@ disallow_untyped_decorators = true
 warn_return_any = true
 warn_unreachable = true
 exclude = "tests"
+
+[[tool.mypy.overrides]]
+module = "fgr.docs.commands"
+ignore_missing_imports = true
 
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.

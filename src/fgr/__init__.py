@@ -2,9 +2,7 @@
 Overview
 ========
 
-**Owner:** dan@1howardcapital.com
-
-**Maintainer:** dan@1howardcapital.com
+**Author:** dan@1howardcapital.com
 
 **Summary:** Zero-dependency python framework for object oriented development.
 Implement _once_, document _once_, in _one_ place.
@@ -33,9 +31,14 @@ Install from command line, with pip:
 
 `$ pip install fgr`
 
-```
-
 """
+
+__all__ = (
+    'core',
+    'log',
+    'Object',
+    'Field',
+    )
 
 from . import core
 
@@ -44,4 +47,4 @@ from . core import log
 from .core.fields import Field
 from .core.objects import Object
 
-__version__ = '0.3.2'
+__version__ = '0.4.0-rc.1'

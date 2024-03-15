@@ -6,6 +6,10 @@ https://github.com/aquasecurity/trivy/blob/main/pkg/fanal/secret/builtin-rules.g
 
 """
 
+__all__ = (
+    'REDACTION_PATTERNS',
+	)
+
 import re
 
 from . import dtypes

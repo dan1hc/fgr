@@ -1,5 +1,8 @@
 name: main
 
+permissions:
+  id-token: write
+
 on:
   pull_request:
     branches:
@@ -24,8 +27,21 @@ env:
   PY_VERSIONS: "[\"3.12\",\"3.11\",\"3.10\"]"
 
 jobs:
-  setup:
+  validate:
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: install-npm-deps
+        run: npm i @actions/core @actions/github
+      - id: validate-commit-message
+        uses: ./.github/actions/validate-commit-message
+        if: github.event_name == 'pull_request'
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+  setup:
+    needs: validate
+    runs-on: ubuntu-latest
+    if: always() && !failure() && !cancelled()
     outputs:
       python-versions: ${{ steps.setVariables.outputs.python-versions }}
     steps:
@@ -33,12 +49,10 @@ jobs:
         run: |
           echo "python-versions=${{ toJson(env.PY_VERSIONS) }}" >> $GITHUB_OUTPUT
   lint:
-    needs: setup
+    needs: [setup]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: validate commit msg
-        uses: ./.github/actions/validate-commit-message
       - name: Set up Python Latest
         uses: actions/setup-python@v5
         with:

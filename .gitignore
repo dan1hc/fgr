@@ -1,6 +1,6 @@
 /build
 /dist
-/docs/build
+/docs
 *.egg*
 *.DS_store
 

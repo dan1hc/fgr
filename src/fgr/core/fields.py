@@ -1,3 +1,5 @@
+"""Core Field module."""
+
 __all__ = (
     'Field',
     )
@@ -63,6 +65,12 @@ class Field(  # type: ignore[misc]
     Query to match the opposite of any conditions specified \
     instead.
 
+    Queries also support optional result limiting and sorting:
+
+    * Result limits can be specified by setting the `limit` field.
+    * Results can be sorted any number of times using the `+=` and `-=` \
+    operators.
+
     ---
 
     ### Example
@@ -74,13 +82,15 @@ class Field(  # type: ignore[misc]
             | (Object.string_field % ('test', 0.75))
             )
         & ~(Object.list_field << 'test')
-        )
+        ) += 'string_field' -= 'integer_field'
     ```
 
     In the example above, the query would match any `Object` for which \
     the string `'test'` is `not` a member of `list_field` and for which \
     either the value for `integer_field` is greater than or equal to `1` \
-    or the value for `string_field` is at least `75%` similar to `'test'`.
+    or the value for `string_field` is at least `75%` similar to `'test'`. \
+    Results would then be sorted first in `ascending` order on `string_field`, \
+    then in `descending` order on `integer_field`.
 
     """
 
@@ -348,7 +358,7 @@ class Field(  # type: ignore[misc]
                     validate_dtype=validate_dtype
                     )
             elif issubclass(t, bool) and v.lower() in {'true', 'false'}:
-                return bool(v.title())
+                return v.lower() == 'true'
             elif issubclass(t, typing.get_args(dtypes.NumberType)) and (
                 (p := v.partition('.'))[0].isnumeric()
                 or (p[1] and p[2].isnumeric())

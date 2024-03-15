@@ -1,3 +1,5 @@
+"""Typing utility functions."""
+
 __all__ = (
     'is_classvar',
     'is_finalvar',

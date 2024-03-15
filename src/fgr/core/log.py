@@ -167,9 +167,8 @@ from . import constants
 from . import utils
 
 
-class Constants(constants.PackageConstants):  # noqa
-
-    pass
+class Constants(constants.PackageConstants):
+    """Constant values specific to logging."""
 
 
 @functools.lru_cache(maxsize=1)
@@ -190,7 +189,7 @@ def _log() -> logging.Logger:
                 '"level": %(levelname)s,\n',
                 '"time": %(asctime)s,\n',
                 '"log": %(name)s,\n',
-                '"data": %(message)s}',
+                '"data": %(message)s\n}',
                 )
             ),
         )
@@ -250,7 +249,9 @@ def _log() -> logging.Logger:
         elif not isinstance(exc_info, tuple):
             exc_info = sys.exc_info()
         if (
-            exc_info[-1] is not None
+            Constants.LOG_TRACE
+            and level >= logging.ERROR
+            and exc_info[-1] is not None
             and not isinstance(exc_info[1], KeyboardInterrupt)
             ):
             msg['traceback'] = traceback.format_exc()
@@ -266,7 +267,7 @@ def _log() -> logging.Logger:
                     default=utils.convert_for_representation,
                     indent=Constants.INDENT,
                     sort_keys=True
-                    ) + '\n',
+                    ),
                 Constants.INDENT * ' '
                 ),
             tuple(),

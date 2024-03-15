@@ -1,3 +1,5 @@
+"""Miscellaneous utility functions."""
+
 __all__ = (
     'camel_case_to_kebab_case',
     'camel_case_to_snake_case',
