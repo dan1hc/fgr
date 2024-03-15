@@ -38,6 +38,12 @@ class Constants(core.constants.PackageConstants):  # noqa
         )
 
 
+try:
+    DEFAULT_USER = os.getlogin()
+except OSError:
+    DEFAULT_USER = '<UNSPECIFIED>'
+
+
 root_parser = argparse.ArgumentParser(
     description='root_parser',
     formatter_class=argparse.ArgumentDefaultsHelpFormatter,
@@ -82,7 +88,7 @@ docs_parser.add_argument(
     '-a',
     help='specify package author',
     dest='author',
-    default=os.getlogin(),
+    default=DEFAULT_USER,
     )
 docs_parser.add_argument(
     '--output',
