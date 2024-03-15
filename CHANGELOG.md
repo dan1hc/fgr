@@ -2,6 +2,17 @@
 
 
 
+## v0.4.2 (2024-03-15)
+
+### Fix
+
+* fix: __os_exception_handling__
+
+os.getlogin unreliable...
+
+fixes #30 ([`2884a2f`](https://github.com/dan1hc/fgr/commit/2884a2f69bb5827254d5d503aee0a01ddacdcecd))
+
+
 ## v0.4.1 (2024-03-15)
 
 ### Ci
