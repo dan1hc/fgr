@@ -30,6 +30,7 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - id: install-npm-deps
         run: npm i @actions/core @actions/github
       - id: validate-commit-message
