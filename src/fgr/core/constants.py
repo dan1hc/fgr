@@ -1,3 +1,9 @@
+"""Core constants."""
+
+__all__ = (
+    'PackageConstants',
+    )
+
 import os
 
 
@@ -101,6 +107,7 @@ class PackageConstants:
     LOG_MAX_CHARS  = int(os.getenv('LOG_MAX_CHARS', 256))
     LOG_CUTOFF_LEN = int(os.getenv('LOG_CUTOFF_LEN', 12))
     LOG_WRAP_WIDTH = int(os.getenv('LOG_WRAP_WIDTH', 64))
+    LOG_TRACE      = os.getenv('LOG_TRACE', 'false').lower() == 'true'
     M_LINE_TOKEN   = '[[MULTI.LINE.STRING.AS.ARRAY]]'
 
     FIELDS_MODULE  = '.'.join((PACAKGE, 'core', 'fields'))

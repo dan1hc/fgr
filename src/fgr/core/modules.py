@@ -1,3 +1,5 @@
+"""Helper module to avoid circular imports."""
+
 __all__ = (
     'Modules',
     )

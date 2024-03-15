@@ -1,3 +1,5 @@
+"""Query objects."""
+
 __all__ = (
     'Query',
     'QuerySortBy',

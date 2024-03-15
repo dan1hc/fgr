@@ -1,3 +1,9 @@
+"""Typing constants."""
+
+__all__ = (
+    'TypeConstants',
+    )
+
 import typing
 
 from .. import constants

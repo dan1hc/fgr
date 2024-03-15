@@ -1,3 +1,5 @@
+"""Core Meta and Base class module."""
+
 __all__ = (
     'Base',
     'Meta',

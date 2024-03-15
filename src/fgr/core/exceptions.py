@@ -1,3 +1,5 @@
+"""Core exceptions module."""
+
 __all__ = (
     'FieldAnnotationeError',
     'IncorrectCasingError',

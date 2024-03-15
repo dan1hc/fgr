@@ -1,3 +1,5 @@
+"""Core Enums module."""
+
 __all__ = (
     'Boolean',
     'MatchThreshold',

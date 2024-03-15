@@ -1,3 +1,5 @@
+"""Core Object module."""
+
 __all__ = (
     'Object',
     )
@@ -114,13 +116,13 @@ class Object(meta.Base):  # type: ignore[misc]
     the trailing underscore removed on conversion to / from \
     DBO, REST, and JSON representations.
 
-    * This allows for python keywords, such as 'in_', to be used \
+    * This allows for python keywords, such as `in_`, to be used \
     as object fields, where they would otherwise raise errors \
     without the proceeding underscore.
 
     * On translation to and from dictionaries, keys without \
     underscores will still be checked against these fields -- \
-    so, a dictionary with key 'in' will correctly map to the 'in_' \
+    so, a dictionary with key `in` will correctly map to the `in_` \
     field on the Object. See below for more detail.
 
     ```py
@@ -292,32 +294,5 @@ class Object(meta.Base):  # type: ignore[misc]
     ```py
     len(Object)
     ```
-
-    Querying Databases
-    ------------------
-
-
-    Queries for `Objects` can be generated from their fields \
-    using the following comparison operators:
-
-    * `field_1_eq_filter = Object.field_1 == 'test_value_123'`
-    * `field_1_ne_filter = Object.field_1 != 'test_value_123'`
-    * `field_1_ge_filter = Object.field_1 >= 'test_value_123'`
-    * `field_1_gt_filter = Object.field_1 > 'test_value_123'`
-    * `field_1_le_filter = Object.field_1 <= 'test_value_123'`
-    * `field_1_lt_filter = Object.field_1 < 'test_value_123'`
-
-    And the following special operators:
-
-    * `field_1_contains_filter = Object.field_1 << 'test_value_123'`
-    * `field_1_similarity_filter = Object.field_1 % 'test_value_123'`
-    * `field_1_similarity_filter_with_threshold = Object.field_1 % ('test_value_123', 0.8)`
-
-    Queries may be chained together using the `&` and `|` bitwise \
-    operators, corresponding to `and` and `or` clauses respectively.
-
-    Additionally, the invert (`~`) operator may be prefixed to any \
-    Query to match the opposite of any conditions specified \
-    instead.
 
     """

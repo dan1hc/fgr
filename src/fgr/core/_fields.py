@@ -1,3 +1,5 @@
+"""Private fields module."""
+
 __all__ = (
     'Field',
     )

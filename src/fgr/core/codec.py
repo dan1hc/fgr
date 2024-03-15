@@ -1,3 +1,5 @@
+"""Core serialization module."""
+
 __all__ = (
     'encode',
     )

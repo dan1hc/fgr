@@ -2,9 +2,7 @@
 Overview
 ========
 
-**Owner:** dan@1howardcapital.com
-
-**Maintainer:** dan@1howardcapital.com
+**Author:** dan@1howardcapital.com
 
 **Summary:** Zero-dependency python framework for object oriented development.
 
@@ -19,11 +17,29 @@ import fgr
 
 """
 
+__all__ = (
+    'codec',
+    'constants',
+    'dtypes',
+    'enums',
+    'exceptions',
+    '_fields',
+    'fields',
+    'log',
+    'meta',
+    'modules',
+    'objects',
+    'patterns',
+    'query',
+    'utils',
+    )
+
 from . import codec
 from . import constants
 from . import dtypes
 from . import enums
 from . import exceptions
+from . import _fields
 from . import fields
 from . import log
 from . import meta
@@ -34,5 +50,3 @@ from . import query
 from . import utils
 
 utils._resolve_remaining_type_refs()
-
-__version__ = '0.0.0'

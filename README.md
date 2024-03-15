@@ -1,8 +1,8 @@
-# fgr
+# [![banner](https://1howardcapital.s3.amazonaws.com/images/fgr/banner.png)](https://github.com/dan1hc/fgr)
 
 [![MinVersion](https://img.shields.io/python/required-version-toml?tomlFilePath=https://raw.githubusercontent.com/dan1hc/fgr/main/pyproject.toml&color=gold)](https://pypi.org/project/fgr)
 [![PyVersions](https://img.shields.io/pypi/pyversions/fgr?color=brightgreen)](https://pypi.org/project/fgr)
-[![OpenSSF](https://img.shields.io/cii/level/8565)](https://www.bestpractices.dev/projects/8565)
+[![OpenSSF](https://www.bestpractices.dev/projects/8565/badge)](https://www.bestpractices.dev/projects/8565)
 [![CI](https://github.com/dan1hc/fgr/actions/workflows/main.yml/badge.svg?branch=main&event=push)](https://github.com/dan1hc/fgr/actions)
 [![codeql](https://github.com/dan1hc/fgr/workflows/codeql/badge.svg)](https://github.com/dan1hc/fgr/actions/workflows/codeql.yml)
 [![coverage](https://img.shields.io/badge/dynamic/toml?url=https://raw.githubusercontent.com/dan1hc/fgr/main/pyproject.toml&query=tool.coverage.report.fail_under&label=coverage&suffix=%25&color=brightgreen)](https://github.com/dan1hc/fgr/actions)
@@ -14,9 +14,9 @@
 
 # Overview
 
-**Owner:** dan@1howardcapital.com
+**Author:** dan@1howardcapital.com | daniel.dube@annalect.com
 
-**Maintainer:** dan@1howardcapital.com
+**Pronunciation:** _ˈfiɡər `>` ˈfiɡyər `==` "figure"_
 
 **Summary:** Zero-dependency python framework for object oriented development.
 Implement _once_, document _once_, in _one_ place.
@@ -347,7 +347,7 @@ fgr.log.info(AgentFlea())
 
 ## Planned Features
 
-* #### Wiki / Sphinx Documentation Support
+* #### ~~Wiki / Sphinx Documentation Support~~ Done!
     * fgr should support a simple interface for generating wiki / sphinx
     style documentation for packages.
 * #### RESTful Framework / OpenAPI Support
