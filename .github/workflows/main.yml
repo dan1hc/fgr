@@ -37,6 +37,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Install npm deps
+        run: |
+          npm i @actions/core @actions/github
       - name: validate commit msg
         uses: ./.github/actions/validate-commit-message
       - name: Set up Python Latest
