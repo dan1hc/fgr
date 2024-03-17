@@ -1,4 +1,4 @@
-## Core Tenants
+## Core Tenets
 
 #### _for people_
 
@@ -24,7 +24,7 @@
 If someone is asking a question that is patently misguided, it is incumbent upon you (the ostensibly erudite responder) to:
 
 1. Draw from your own experience as a former denizen of [Plato's Cave](https://en.wikipedia.org/wiki/Allegory_of_the_cave) (even if you have to think a long time back) to understand _why_ the asker is taking the approach they are.
-2. Recall the core tenants listed above and remember that:
+2. Recall the core tenets listed above and remember that:
     * No one will ever be less encouraged to learn from wisdom than when it is delivered in such a way that makes the recipient question a broader competency about themselves.
     * No one has ever questioned their personal competency when told their first idea is _still_ a good idea.
     * That your idea is better is never clearer to someone else than when it already explicitly states all the good things about theirs.

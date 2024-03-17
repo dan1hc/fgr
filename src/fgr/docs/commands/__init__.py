@@ -423,7 +423,8 @@ def document(
             if site_map_urls:
                 parsed = urllib.parse.urlparse(site_map_urls[0])
                 url_root = '://'.join((parsed.scheme, parsed.hostname))
-                robots_txt += f'\n\nSitemap: {url_root}/sitemap.xml'
+                path = parsed.path.strip('/')
+                robots_txt += f'\n\nSitemap: {url_root}/{path}/sitemap.xml'
             robots_file.write(robots_txt)
 
     # Inject readme.md if exists.
