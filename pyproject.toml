@@ -31,8 +31,8 @@ classifiers = [
     ]
 
 [project.urls]
-Documentation = "https://fgr.readthedocs.io/en/latest/fgr.html"
-Homepage = "https://fgr.readthedocs.io/en/latest/"
+Documentation = "https://fgr.readthedocs.io/en/stable/fgr.html"
+Homepage = "https://fgr.readthedocs.io/en/stable/"
 Repository = "https://github.com/dan1hc/fgr.git"
 Issues = "https://github.com/dan1hc/fgr/issues"
 Changelog = "https://github.com/dan1hc/fgr/blob/main/CHANGELOG.md"

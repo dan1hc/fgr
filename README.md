@@ -385,7 +385,7 @@ fgr.log.info(AgentFlea())
         * run tests automatically, generate reports, and prevent commits that break tests
         * automatically prevent commits that do not adhere to standardized commit
         message [conventions](https://www.conventionalcommits.org/en/v1.0.0/)
-        * using those conventions, automatically [semantically version](https://python-semantic-release.readthedocs.io/en/latest/#getting-started)
+        * using those conventions, automatically [semantically version](https://python-semantic-release.readthedocs.io/en/stable/#getting-started)
         each successful PR and automatically generate and update a
         CHANGELOG.md file
         * automatically generate and publish secure wiki documentation

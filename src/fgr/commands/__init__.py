@@ -195,7 +195,7 @@ docs_parser.add_argument(
                 'included in an auto-generated xml sitemap'
                 ),
             '',
-            'ex. https://example.readthedocs.io/en/latest',
+            'ex. https://example.readthedocs.io/en/stable',
             '',
             'can be repeated to include multiple versions'
             )
