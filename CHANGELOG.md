@@ -2,6 +2,17 @@
 
 
 
+## v0.4.4 (2024-03-17)
+
+### Fix
+
+* fix: __docs_stable__
+
+point to stable docs, not latest.
+
+fixes #35 ([`727fe9e`](https://github.com/dan1hc/fgr/commit/727fe9e66bf5bf3b6a5c6b9bb01c0429c37df961))
+
+
 ## v0.4.3 (2024-03-17)
 
 ### Documentation
