@@ -2,6 +2,23 @@
 
 
 
+## v0.4.3 (2024-03-17)
+
+### Documentation
+
+* docs: __rtd_build_ci__ ([`7950da3`](https://github.com/dan1hc/fgr/commit/7950da3e3f4688b4eba0734bc9e3a8c0e760e1b2))
+
+* docs: __rtd_build_ci__ ([`0970546`](https://github.com/dan1hc/fgr/commit/0970546e4c2df102ca385698d137cb8b11a440c6))
+
+### Fix
+
+* fix: __docs_sitemap_loc__
+
+point robots.txt to generated sitemap. also minor typos in other files.
+
+fixes #34 ([`e0496e5`](https://github.com/dan1hc/fgr/commit/e0496e579cf2b391a241856daf0798d92134e6e1))
+
+
 ## v0.4.2 (2024-03-15)
 
 ### Fix
