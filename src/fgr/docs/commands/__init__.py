@@ -408,6 +408,7 @@ def document(
                                     (
                                         '',
                                         f'User-agent: {agent}',
+                                        'Allow: /',
                                         *Constants.NO_CRAWL_PATHS,
                                         )
                                     )
