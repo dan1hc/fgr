@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths-ignore:
-      - '.github/**/*'
-      - 'src/fgr/__init__.py'
+      - './.github/**/*'
+      - './src/fgr/__init__.py'
       - '.gitignore'
       - '.pre-commit-config.yaml'
       - '.readthedocs.yaml'
@@ -21,8 +21,8 @@ on:
     branches:
       - main
     paths-ignore:
-      - '.github/**/*'
-      - 'src/fgr/__init__.py'
+      - './.github/**/*'
+      - './src/fgr/__init__.py'
       - '.gitignore'
       - '.pre-commit-config.yaml'
       - '.readthedocs.yaml'
