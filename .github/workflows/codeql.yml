@@ -4,21 +4,35 @@ on:
   pull_request:
     branches:
       - main
-    paths:
-      - '**/*.py'
+    paths-ignore:
+      - './.github/**/*'
+      - './src/fgr/__init__.py'
+      - '.gitignore'
+      - '.pre-commit-config.yaml'
+      - '.readthedocs.yaml'
+      - 'CHANGELOG.md'
+      - 'CODE_OF_CONDUCT.md'
+      - 'CONTRIBUTING.md'
+      - 'LICENSE'
+      - 'pyproject.toml'
+      - 'README.md'
+      - 'SECURITY.md'
   push:
     branches:
       - main
     paths-ignore:
-      - '*.md'
-      - '*.toml'
-      - '*.yaml'
+      - './.github/**/*'
+      - './src/fgr/__init__.py'
       - '.gitignore'
-      - '.github/**/*'
-      - 'docs/*'
-      - 'src/fgr/__init__.py'
-      - 'CODE_OF_CONDUCT'
+      - '.pre-commit-config.yaml'
+      - '.readthedocs.yaml'
+      - 'CHANGELOG.md'
+      - 'CODE_OF_CONDUCT.md'
+      - 'CONTRIBUTING.md'
       - 'LICENSE'
+      - 'pyproject.toml'
+      - 'README.md'
+      - 'SECURITY.md'
   schedule:
     - cron: 0 0 * * 0
 
