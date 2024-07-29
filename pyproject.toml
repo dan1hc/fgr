@@ -48,7 +48,7 @@ develop = [
     ]
 docs = [
     "commonmark==0.9.*",
-    "sphinx==7.*",
+    "sphinx>=7,<9",
     ]
 
 [project.scripts]
